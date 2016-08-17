@@ -1,0 +1,72 @@
+<html><head>
+  <title>FreePastry Tutorial</title>
+  <link rel="stylesheet" href="tutorial.css" />
+</head>
+<body>
+
+<div class="content">
+<div class="frontmatter">
+
+<h1>The FreePastry Tutorial.</h1>
+
+<div class="abstract">This tutorial is designed to get you cooking quickly with the FreePastry
+API and software toolkit.</div>
+
+<h4>Version @tutorial_version@; @tutorial_date@.  For <a
+href="http://freepastry.org/">FreePastry</a> version @freepastry_version@.  Maintained by @maintainer@.</h4>
+
+</div>
+
+<h2>Contents</h2>
+<ul>
+	<h3>Getting Started</h3>
+	<ul>
+	<li><a href="index.html#requirements">What You'll Need</a></li>
+	</ul>
+	<h3>Lessons</h3>
+	<ul>
+	<li><a href="tut_continuations.html#lesson0a">Lesson 0.a</a>: Continuations.</li>
+	<li><a href="tut_environment.html#lesson0b">Lesson 0.b</a>: Environment.</li>
+	<li><a href="tut_beginning.html#lesson1">Lesson 1</a>: Minimal code to create/join a pastry ring.</li>
+	<li><a href="tut_beginning.html#lesson2">Lesson 2</a>: Execute the code to launch your new ring.</li>
+	<li><a href="tut_beginning.html#lesson3">Lesson 3</a>: Write a simple application using the commonAPI. (this will show you how to send and receive messages)</li>
+	<li><a href="tut_multiple_nodes.html#lesson4">Lesson 4</a>: Running multiple nodes in the same JVM.</li>
+	<li><a href="tut_timertask.html#timer">Timer</a>: Scheduling tasks on the FreePastry timer.</li>
+	<li><a href="tut_scribe.html#scribe">Scribe</a>: Group communication including multicast/anycast.</li>
+	<li><a href="tut_past.html#past">Past</a>: FreePastry's DHT.</li>
+	<li><a href="tut_simulator.html#lessonDirect">Simulator Tutorial</a>: Simulating Larger Networks with FreePastry's Discreet Event Simulator.</li>
+	<li><a href="tut_gtitm.html#lessonGtitm">Simulator Tutorial 2</a>: Using a Latency Matrix with FreePastry's Discreet Event Simulator.</li>
+	<li><a href="tut_app_sockets.html#appsocket">Application Level Socket Interface</a>: Manage your application's communication more precicely.</li>
+	<li><a href="tut_splitstream.html#SplitStream">SplitStream</a>: Multi-Tree high-bandwidth content distribution system.</li>
+	<li><a href="tut_raw_serialization.html#raw">Raw Serialization</a>: More efficient serialization of your Messages (than Java Serialization).</li>
+	<li><a href="tut_raw_serialization2.html#raw2">Raw Serialization 2</a>: Override raw serialization with Java serialization.</li>
+	<li><a href="tut_forward.html#forward">Forwarding</a>: Intercept application messages along the route.</li>
+	<li><a href="tut_layers.html#layer">Transport Layers</a>: How to modify FreePastry's lowest level: the transport layer.</li>
+	<li><a href="tut_cancellable_msg.html">Cancellable Messages</a>: Keep track of FreePastry's queue size, and optionally cancel pending messages.</li>
+	</ul>
+	<h3>Coming soon:</h3>
+	<ul>
+	<li>Advanced Scribe: Policies.</li>
+	<li>Advanced Environment.</li>
+	</ul>
+</ul>
+
+<hr/>
+
+<a name="requirements"></a><h2>What You'll Need</h2>
+Before you begin, you should meet the following requirements.  
+<ol>
+  <li>An intermediate level of knowledge in the Java programming language.  <a href="http://java.sun.com/docs/books/tutorial/">The Java Tutorial</a> is a good place to start. 
+  <li>A copy of a current JDK, @min_jre_version@ or later.  <a href="http://java.sun.com/j2se/index.jsp">Sun's J2SE</a>. 
+  <li>A basic understanding of Pastry overlay structure.  Read the short overview <a href="http://freepastry.org/PAST/overview.pdf">[pdf]</a><a href="http://freepastry.org/PAST/overview.ps">[ps]</a> of <a href="http://freepastry.org/">FreePastry</a>.
+  <li>Have a working copy of FreePastry-@freepastry_version@ or later.  You can simply download the <a href="http://freepastry.org/FreePastry/FreePastry-@freepastry_version@.jar">current jar</a>, or download and build the <a href="http://freepastry.org/FreePastry/">source</a>.
+</ol>
+
+<div class="footer">
+Pastry tutorial version @tutorial_version@. &nbsp;&nbsp;&nbsp; Last updated @tutorial_date@.
+&nbsp;&nbsp;&nbsp; For FreePastry @freepastry_version@. &nbsp;&nbsp;&nbsp; Maintained by @maintainer@.
+</div>
+
+</div>
+</body>
+</html>

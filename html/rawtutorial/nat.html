@@ -1,0 +1,94 @@
+<html>
+<title>FreePastry NAT Configuration</title>
+
+<h1><center>FreePastry NAT/Firewall Configuration</center></h1>
+
+<p>This page is designed to help you configure FreePastry for your particular NAT/firewall setup.  It covers FreePastry 2.0.</p>
+
+<p>If FreePastry detects an invalid configuration, it will prompt the user for how to proceed.  However if you are a developer, you should read over this document to understand how FreePastry will behave in various scenarios so you can pre-configure FreePastry to do the appropriate behaviour for your application.</p>
+
+<p>The document has 3 sections.  The first shows you how to configure FreePastry's parameters.  The second section consists of quick links to help you configure FreePastry based on your particular setup.  Some require you to run with additional libraries in your classpath, some require to adjust your parameters.  The third is a detailed explanation of how FreePastry's firewall configuration works.</p>  
+<hr/>
+<h2>Definitions:</h2>
+<ul>
+  <li><a href="http://en.wikipedia.org/wiki/Network_address_translation">What is a NAT?</a></li>
+  <li><a href="http://freepastry.org/">What is a FreePastry?</a></li>
+</ul>
+<hr/>
+
+<h2><a href="params.html">How to adjust FreePastry's parameters.</a></h2>
+
+<h2>Quick links for your particular setup.</h2>
+<ul>
+  <li><a href="#open">I'm not firewalled.</a></li>
+  <li><a href="#lan"/>I'm running the entrie network on my LAN (or a single computer), which happens to be behind a NAT.</a></li>
+  <li><a href="#upnp">UPnP: Let FreePastry configure my NAT for me.</a></li>
+  <li><a href="#forward">I want to manually configure my port forwarding settings in my NAT.</a></li>
+</ul>
+
+<h2><a href="#detail">Detailed information.</a></h2>
+<hr/>
+
+<h2>Specific configurations.</h2>
+<a name="open"/><h3>I'm not firewalled.</h3>
+<p>FreePastry should work fine for you by default.  Sometimes it may fail the firewall test which verifies bidirectional connectivity to the bootstrap.  If this happens, it means that your connectivity to the Bootstrap node is too poor for FreePastry to get any communication through, and thus freepastry incorrectly assumes you are firewalled.  If you want to disable this test set:</p>
+<pre>
+firewall_test_policy = never
+</pre>
+
+<p>It is also possible that while you do have an internet routable address, there is still a firewall blocking one or more of your ports.  Verify that you don't have blocked ports.</p>
+
+<a name="lan"/><h3>I'm running the entrie network on my LAN (or a single computer), which happens to be behind a NAT.</h3>
+<p>Disable UPnP altogether by setting this:</p>
+
+<pre>
+nat_search_policy = never
+</pre>
+
+<p>Note that you need to re-enable this if you wish to join/create a network that goes over the internet.</p>
+
+<a name="upnp"/><h3>UPnP: Let FreePastry configure my NAT for me.</h3>
+Many firewalls can configure port forwarding programatically.  See <a href="http://en.wikipedia.org/wiki/Internet_Gateway_Device">UPnP Internet Gateway Device</a> for more information.
+FreePastry uses <a href="http://www.sbbi.net/site/index.html">SBBI</a>'s <a href="http://www.sbbi.net/site/upnp/">UPnPLib</a> to configure the NAT.
+
+<p>Enable UPnP on your router if you haven't already done so.  If you have trouble with this check your router's documentation online at your manufacturer's site.</p>
+<p>Include these libraries in your classpath when you run the FreePastry based application.  They can be found in the source distribution.</p>
+
+<pre>
+commons-jxpath-1.1.jar:commons-logging.jar:sbbi-upnplib-xxx.jar
+</pre>
+
+So, to run the lesson3 tutorial:
+
+<pre>
+java -cp .:FreePastry-2.0b2.jar:commons-jxpath-1.1.jar:commons-logging.jar:sbbi-upnplib-1.0.3.jar rice.tutorial.lesson3.DistTutorial 9001 10.9.8.7 9001
+</pre>
+
+<a name="forward"/><h3>I want to manually configure my port forwarding settings in my NAT.</h3>
+Configure forwarding of both UDP and TCP on the same port that you are using.  Check out <a href="http://www.portforward.com/">www.portforward.com</a> for help.
+
+<h4>If you have a <i>dynamic address</i> (your ISP may re-assign your IP address):</h4>
+
+<pre>
+probe_for_external_address = true
+</pre>
+
+<p><b>Note:</b>The external port and local port must be the <i>same</i> for this to work.  In other words you can't forward port 9300 -> 9001, you must use the same port.</p>
+
+<h4>If you have a <i>static address</i> (your ISP doesn't change your IP address everytime you reboot your router):</h4>
+Set this parameter to the address you set up forwarding.  Note that it is ok to have <i>different</i> external port from local port.
+
+<pre>
+external_address = 123.45.67.89:1234
+</pre>  
+
+<hr/>
+
+<a name="detail"/>
+<h2>Detailed explanation of FreePastry NAT settings.</h2>
+
+<h4>Hairpinning</h4>
+
+
+
+</html>

@@ -1,0 +1,90 @@
+<html><head>
+  <title>FreePastry Tutorial</title>
+  <link rel="stylesheet" href="tutorial.css" />
+</head>
+<body>
+
+<div class="content">
+<div class="frontmatter">
+
+<h1>The FreePastry Tutorial.</h1>
+
+<div class="abstract">This tutorial is designed to get you cooking quickly with the FreePastry
+API and software toolkit.</div>
+
+<h4>Version @tutorial_version@; @tutorial_date@.  For <a
+href="http://freepastry.org/">FreePastry</a> version @freepastry_version@.  Maintained by @maintainer@.</h4>
+
+</div>
+
+<div class="nav">
+  <span class="nav-left"><a href="tut_raw_serialization.html#raw">Previous (Raw Serialization 1)</a></span> 
+  <span class="nav-center"><a href="index.html">Contents</a></span> 
+  <span class="nav-right"><a href="tut_forward.html#forward">Next (Forwarding)</a></span>
+</div><br/><hr/>
+
+<a name="raw2"><h1>Raw Serialization 2</h1></a>
+<h2>Override raw serialization with Java serialization.</h2>
+
+This tutorial shows you how to extend a raw serialized message from another application but use Java Serialization.  In other words, how to override RawMessage to use Java Serialization.
+
+<h3>Download the tutorial files: 
+<a href="./src/rawserialization2/DistTutorial.java">DistTutorial.java</a>
+<a href="./src/rawserialization2/MyApp.java">MyApp.java</a>,
+<a href="./src/rawserialization2/MyMsg.java">MyMsg.java</a> into a directory called rice/tutorial/rawserialization2/.</h3>
+
+<p/>In this tutorial, we modified lesson4's MyMessage to extend past's LookupMessage instead of implementing Message.  Since LookupMessage is raw serialized, you will run into errors if you don't override it's serialization/deserialization mechanism.  
+
+<p/>Because we extended LookupMessage, we have to modify the constructor to call <code>super()</code>.
+
+<pre>
+public class MyMsg extends LookupMessage {
+
+  ...
+
+  public MyMsg(NodeHandle from, Id to) {
+    super(0,from.getId(),from,to);
+    this.from = from.getId();
+    this.to = to;
+  }
+
+  ...
+
+}
+</pre>
+
+The first thing to do is to override the <code>serialize()</code> method in MyApp.  We implemented this method in the previous tutorial.  However this time, it is simpler.   Because we are using Java Serialization, this does not need to do anything that is message specific.  We use the rice.p2p.util.rawserialization.JavaSerializer's static method <code>serialize()</code>. 
+<pre>
+  public void serialize(OutputBuffer buf) throws IOException {
+    JavaSerializer.serialize(this, buf);
+  }
+</pre>
+
+For reverse compatibility, the default deserializer in the endpoint is the JavaSerializedDeserializer.  All we have to do is to tell it to always use Java(De)Serialization.  We will do this in the constructor for MyApp.  To prevent run-time errors, it is important to make any modifications to the deserializer before calling <code>endpoint.register()</code>.  The <code>setAlwaysUseJavaSerialization(true)</code> call will suppress error messages if the deserializer encounters messages with a type that is not 0.  <i>type 0 is reserved for Java serialized messages.</i>
+
+<pre>
+    this.endpoint = node.buildEndpoint(this, "myinstance");
+
+    ((JavaSerializedDeserializer)endpoint.getDeserializer()).setAlwaysUseJavaSerialization(true);
+    
+    this.endpoint.register();
+</pre>
+
+That's all there is to it.  <h3>Congratulations!  You have overridden the raw serialization of an existing message to use Java serialization!</h3>
+
+
+<hr/>
+<div class="nav">
+  <span class="nav-left"><a href="tut_raw_serialization.html#raw">Previous (Raw Serialization 1)</a></span> 
+  <span class="nav-center"><a href="index.html">Contents</a></span> 
+  <span class="nav-right"><a href="tut_forward.html#forward">Next (Forwarding)</a></span>
+</div><br/>
+
+<div class="footer">
+Pastry tutorial version @tutorial_version@. &nbsp;&nbsp;&nbsp; Last updated @tutorial_date@.
+&nbsp;&nbsp;&nbsp; For FreePastry @freepastry_version@. &nbsp;&nbsp;&nbsp; Maintained by @maintainer@.
+</div>
+
+</div>
+</body>
+</html>

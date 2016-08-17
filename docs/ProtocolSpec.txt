@@ -1,0 +1,1414 @@
+FreePastry 2.0 Serialized Message description version 0.01:
+
+Table of contents:
+0 : Changelog
+1 : FreePastry 2.0 Core Serialization
+  1.1: Overview of the features of the protocol
+  1.2: Data Types
+    byte
+    boolean
+    short
+    int
+    long
+    float
+    double
+    String
+    EpochInetSocketAddress
+  1.3: TCP Stream Header
+  1.4: Message Header 
+  1.5: FreePastry Objects 
+    Id 
+    NodeHandle
+    Leafset
+    RouteSet
+  1.6: Other FP objects
+    IdRange
+    NodeHandleSet
+    BloomFilter
+  1.7: Core Messages
+    1.7.1: RouteMessage
+    1.7.2: Join Protocol 
+      JoinRequest
+      ConsistentJoinMessage
+    1.7.3: LeafSet Maintenance 
+      RequestLeafSet:
+      BroadcastLeafSet:
+    1.7.4: Routing Table Maintenance 
+      RequestRouteRow:
+      BroadcastRouteRow:
+    1.7.5: CommonAPI impl 
+      PastryEndpointMessage:
+  1.8: Direct Access Messages 
+    LeafSetRequestMessage
+    LeafSetResponseMessage
+    NodeIdRequestMessage
+    NodeIdResponseMessage
+    RouteRowRequestMessage
+    RouteRowResponseMessage
+    RoutesRequestMessage
+    RoutesResponseMessage
+    SourceRoute
+  1.9: Liveness Messages (UDP)
+    1.9.1: Liveness Header
+    1.9.2: Liveness Content
+2 : CommonApi Apps 
+2.1: Scribe 
+2.1.1: Scribe Objects 
+  Topic
+  ScribeContent   
+2.1.2: Content Messages 
+  PublishRequestMessage
+  PublishMessage
+  AnycastMessage
+2.1.3: Tree Formation Messages 
+  SubscribeMessage
+  SubscribeAckMessage
+  SubscribeFailedMessage
+  UnsubscribeMessage
+  DropMessage
+2.2: Past 
+2.2.1: Past Objects 
+  PastContent
+  PastContentHandle  
+2.1.2: Past Messages 
+  CacheMessage    
+  FetchHandleMessage 
+  FetchMessage    
+  InsertMessage
+  LookupHandlesMessage
+  LookupMessage    
+2.2: GCPast 
+2.2.1: GCPast Objects 
+  GCId 
+2.2.2: GCPast Messages 
+  GCRefreshMessage
+  GCInsertMessage
+  GCLookupHandlesMessage  
+2.3: Replication 
+  RequestMessage
+  ResponseMessage            
+2.4: Multiring 
+  RingId
+  RingMessage  
+2.5: Glacier 
+2.5.1: Glacier Objects 
+  Fragment
+  VersionKey    
+  FragmentKey
+  Manifest
+2.5.2: Glacier Messages      
+  GlacierDataMessage
+  GlacierFetchMessage
+  GlacierNeighborRequestMessage
+  GlacierNeighborResponseMessage
+  GlacierNeighborResponseMessage
+  GlacierRangeForwardMessage
+  GlacierRangeQueryMessage
+  GlacierRangeResponseMessage
+  GlacierRefreshCompleteMessage
+  GlacierRefreshPatchMessage
+  GlacierRefreshProbeMessage
+  GlacierRefreshResponseMessage
+  GlacierResponseMessage
+  GlacierSyncMessage          
+2.6: Aggregation 
+  Aggregate
+  NonAggregate         
+2.7: Splitstream 
+  SplitStreamContent
+  SplitStreamSubscribeContent
+  
+0: Chagelog (changes to this document)
+Version 0.01, 4/25/07: Added support for RouteMessage version 1 which optionally supports a DestinationHandle instead of a Target (compatible with FP 2.0_01+)
+  
+1.1: Overview of some of the features of the protocol. ************************
+  FreePastry provides a structured peer to peer routing overlay, but is not necessarily useful in of itself.  Application layers must be written on top of FreePastry.  We will call the layer above FreePastry an Application.  This application may implement a DHT (such as Past) or a Multicast Network (such as Scribe) which higher level applications may further be written on.
+  FreePastry uses Source Routing to handle temporary network anomalies.  
+  FreePastry uses TCP for all overlay maintenance and application traffic.
+  FreePastry uses UDP for liveness checks.
+  FreePastry provides a mechanism for Applications to open their own sockets through the source routes.  This allows applications to manage their own congestion control without interfering with overlay maintenance.  However normal messages may be sent on the same sockets as overlay maintenance traffic.  Application 0 is a FreePastry control socket, and is not delivered to an application.
+  From an application's perspective, the abstraction for an node in FreePastry is the NodeHandle.  
+  FreePastry interacts with other nodes in the network using EpochInetSocketAddresses.  The EpochInetSocketAddress is based on IPv4 and encodes an IP address, a port, and an 8byte epoch.  The purpose of the epoch is to know if the node has rebooted since last communication.  This gives information to the applications (that may be stateful) about the state of the node.
+  
+1.2: Data Types ***************************************************************
+
+All numbers are in Network (Big) Endian
+byte = 8 bits
+boolean 1 byte
+short = 2 bytes
+int = 4 bytes
+long = 8 bytes
+float = 4 bytes
+double = 8 bytes
+time = long (the difference, measured in milliseconds, between the current time and midnight, January 1, 1970 UTC.)
+
+String is represented as Java's UTF-8:  See here http://en.wikipedia.org/wiki/UTF-8#Java
+// From wikipedia:
+The Java programming language, which uses UTF-16 for its internal text representation, supports a non-standard modification of UTF-8 for string serialization. This encoding is called modified UTF-8. There are two differences between modified and standard UTF-8. The first difference is that the null character (U+0000) is encoded with two bytes instead of one, specifically as 11000000 10000000. This ensures that there are no embedded nulls in the encoded string, presumably to address the concern that if the encoded string is processed in a language such as C where a null byte signifies the end of a string, an embedded null would cause the string to be truncated.
+The second difference is in the way characters outside the BMP are encoded. In standard UTF-8 these characters are encoded using the four-byte format above. In modified UTF-8 these characters are first represented as surrogate pairs (as in UTF-16), and then the surrogate pairs are encoded individually in sequence as in CESU-8. The reason for this modification is more subtle. In Java a character is 16 bits long; therefore some Unicode characters require two Java characters in order to be represented. This aspect of the language predates the supplementary planes of Unicode; however, it is important for performance as well as backwards compatibility, and is unlikely to change. The modified encoding ensures that an encoded string can be decoded one UTF-16 code unit at a time, rather than one Unicode code point at a time. Unfortunately, this also means that characters requiring four bytes in UTF-8 require six bytes in modified UTF-8.
+
+EpochInetSocketAddress:  
+  EpochInetSocketAddress: (IPV4 FreePastry Version 0):
+  +-+-+-+-+-+-+-+-+
+  +   numAddrs    +
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+  +   internet address 0                                          +
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+  +   port 0                      +
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+  +   internet address 1                                          +
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+  +   port 1                      +
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+  +   internet address k                                          +
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+  +   port k                      +       ...
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+  + epoch (long)                                                  +
+  +                                                               +
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+Hard Coded values: 
+
+Id bit length 160
+Routing Table Base Bit Length 4 
+
+
+      
+1.3: TCP Stream Header ********************************************************
+
+Overview:
+  1) Magic Number
+  2) Version Number
+  3) Source Route Header
+  4) Application ID
+  5) Application Stream
+
+
+  // Magic Number
+  byte[4] PASTRY_MAGIC_NUMBER = {0x27, 0x40, 0x75, 0x3A}
+    
+  // Protocol Version (0) for now, but this may become more interesting in the future, such as being in part, a bitwise selection
+  int 0
+
+  // Source Route Header
+  // 0 or more of the following based on the number of hops in the sourceroute:
+  byte[4] HEADER_SOURCE_ROUTE = {0x19, 0x53, 0x13, 0x00}
+  EpochInetSocketAddress next hop
+  
+  // indicates that this is the end of the source route header
+  byte[4] HEADER_DIRECT = {0x06, 0x1B, 0x49, 0x74}
+  
+  int appID // 0 is normal pastry socket, needed for both direct or source routed sockets
+  // non-zero then opens up the socket to the app
+
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+  +                   PASTRY_MAGIC_NUMBER                         + 
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+  +                   version number 0                            + 
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ =}
+  +                   HEADER_SOURCE_ROUTE                         +   }
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   }
+  +            Next Hop (EpochInetSocketAddress)                  +    > // zero or more 
+  +                                                               +    >           
+  +                                                               +   }           
+  +                                                               +   }           
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ =}
+  +                      HEADER_DIRECT                            +   
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   
+  +                          AppId                                +   
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   
+  +                                                               + 
+  +                  <Application Stream>                         + 
+  +                                                               + 
+  +                           ...                                 + 
+
+Here I discuss the protocol for AppId 0 The Normal Pastry socket.  
+
+The Application stream is broken up into Messages.
+
+Each message has the following:
+payload size (int): The size of the rest of the message, including the rest of the header, but not the size itself  
+address (int) : the application in the Overlay that the message goes to
+type (short): the type of message (application dependent)
+  however type 0 is reserved for Java Serialized (or platform dependent) messages
+Sender (NodeHandle) This parameter is optional
+  
+
+
+1.4: Message Header ***********************************************************
+int payloadSize
+int address
+boolean hasSender
+byte priority
+short type (app specific)
+// if hasSender
+  NodeHandle sender // defined in the next section
+<Message Contents>  
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ 
+  +           Total Message Size (not including this)             + 
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ 
+  +              Address (which app to send it to)                +  
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ 
+  +   hasSender?  +   priority    +     type (app specific)       +            
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ 
+  +                                                               +            
+  +                                                               +            
+  +             NodeHandle Sender (if has one)                    +   
+
+  +                                                               +   
+  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   
+  +                                                               + 
+  +                    <Message Contents>                         + 
+  +                                                               + 
+  +                           ...                                 + 
+
+Due to their complexity the rest of the messages are not Word Aligned
+
+
+1.5: FreePastry Objects *******************************************************
+
+FreePastry has several Objects that are often sent over the wire, here is their serialization format:  
+The version is so fundamental to FreePastry that it is tied to the protocol version defined at the beginning of the stream.
+
+Id: 
+  type: 1
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    +   160 Bit (20 byte)                                           +
+    +                                                               +
+    +                                                               +
+    +                                                               +
+    +                                                               +
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Note that Id is extended in at least two places, it is important to always encode
+ the (short) type of Id you are serializing unless you can guarantee the type of Id will
+ always be the same.
+  
+NodeHandle: // associates an Id with an EpochInetSocketAddress (Note: this Id will
+// always be of the default type.
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    + EpochInetSocketAddress                                        +
+    +                                                               +           
+    +                                                               +           
+    +                                                               +           
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    +   Id                                                          +
+    +                                                               +
+    +                                                               +
+    +                                                               +
+    +                                                               +
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+
+Leafset
+    So that small LeafSets (who have overlapping nodes) don't waste bandwidth, 
+    leafset first defines the NodeHandles to be loaded into an array, then 
+    specifies their locations. We do this because
+    a NodeHandle takes up a lot more space than the index in the leafset, and 
+    it may be in the leafset 1 or 2 times.    
+    A leafset consists of a clockwise and counterclockwise "SimilarSet"  If the ring is very small,
+    these values will overlap.
+    
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      + byte theSize  +numUniqueHandls+ byte cwSize   + byte ccwSize  +
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      + NodeHandle baseHandle                                         +
+                       ...                                             
+      +                                                               +
+      +                                                               +
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      + NodeHandle 1st                                                +
+                       ...                                             
+      +                                                               +
+      +                                                               +
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+                       ...                                             
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      + NodeHandle numUniqueHandls-th                                 +
+                       ...                                             
+      +                                                               +
+      +                                                               +
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      + byte cw 1st   +  cw  2nd      + ...           + ccw 1st       +
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      + ccw 2nd       +  ...          + ...           + ccw Nth       +
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+  byte theSize // the total capacity of the leafset, not including the baseHandle  (usually 24)
+  byte numUniqueHandles // the number of NodeHandles to read (in the next step, does not include the baseHandle)
+  byte cwSize // the number of elements of the clockwise SimilarSet
+  byte ccwSize // the number of elements of the counterclockwise SimilarSet    
+  NodeHandle baseHandle
+  // iterate numUniqueHandles times
+    NodeHandle handle
+  // iterate cwSize
+    byte handleIndex // in a clockwise direction
+  // iterate ccwSize
+    byte handleIndex // in a counterclockwise direction
+      
+RouteSet:
+ A set of nodes typically stored in the routing table. The set contains a
+ bounded number of the closest node handles. Since proximity value can change
+ unpredictably, we don't keep the set in sorted order.
+
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     +    maxSize    +    theSize    +    closest    +
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     + NodeHandle 1st                                                +
+                      ...                                             
+     +                                                               +
+     +                                                               +
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+                      ...                                             
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     + NodeHandle theSize-th                                         +
+                      ...                                             
+     +                                                               +
+     +                                                               +
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+  byte maxSize // the capacity
+  byte theSize // the number of elements in this set
+  byte closest // the index of the closest node (often useful for routing decisions)
+  // iterate theSize times
+    NodeHandle entry
+
+
+    
+// the rest of the protocol is not defined with pictures, as many of the elements have 
+// complicated iterations or conditions that can be more well expressed in pseudocode than pictures    
+// (read: I'm Lazy)
+
+1.6: Other Objects ************************************************************
+These objects are not used by the "core" pastry protocol, but may be used by applications
+IdRange: Represents a contiguous range of Pastry ids.
+  Id Clockwise
+  Id CounterClockwise
+  boolean empty
+  
+NodeHandleSet: Represents a set of NodeHandles
+  type: 1 (the normal NodeHandleSet)
+  format:
+    short size
+      // for each size
+      NodeHandle handle
+
+BloomFilter: 
+  int length
+  int numParams
+    int param
+  int numBits
+    bit b
+  // note this will trail zeros to 1 byte if !(numBits % 8 == 0)
+        
+1.7: Core Messages ************************************************************   
+1.7.1: RouteMessage ************************************************************
+  address: 0xACBDFE17 (Router)
+  type: -23525
+  use: To route messages using prefix-based-routing.
+  package: rice.pastry.routing
+
+  format:
+    byte version(1)  
+    int subMessageAddress
+    boolean hasDestinationHandle
+      NodeHandle destination // if hasDestionationHandle is true
+      Id target // if hasDestinationHandle is false
+    NodeHandle prevHop
+    
+    // the internal message:
+    boolean hasSender
+    byte priority
+    short type
+    // if hasSender 
+      NodeHandle internalSender
+    Message internalMsg
+
+// Version 0:
+  format:
+    byte version(0)  
+    int subMessageAddress
+    Id target
+    NodeHandle prevHop
+    
+    // the internal message:
+    boolean hasSender
+    byte priority
+    short type
+    // if hasSender 
+      NodeHandle internalSender
+    Message internalMsg
+
+1.7.2: Join Protocol **********************************************************
+JoinRequest:
+  address: 0xe80c17e8 (Join Protocol)
+  type: 1
+  use: During bootstrap, to find the nearest node to you in Id Space.
+  package: rice.pastry.standard
+  
+  format:
+    byte version (0)
+    byte rtBaseBitLength
+    NodeHandle handle
+    boolean hasJoinHandle
+      NodeHandle joinHandle // if hasJoinHandle
+    // the table
+    short lastRow // decremented on a push call
+    // the routing table has this many rows: (Id bit length)/rtBaseBitLength = 160/4 = 40
+    // and this many columns 2^rtBaseBitLength = 2^4=16
+    // each entry is a RouteSet
+    // for each row
+      boolean hasRow?
+      // if (hasRow) for each column {
+        boolean hasColumn
+        // if (hasColumn) for each entry {
+          RouteSet entry
+        // }
+      // }    
+    boolean hasLeafset
+    // if (hasLeafset) 
+      LeafSet leafset
+          
+ConsistentJoinMessage:
+  address: 0xe80c17e8 (Join Protocol)
+  type: 2
+  use: During Join.  To verify that every node in leafset is aware of your existence, and gossip Leafset
+  package: rice.pastry.standard
+  
+  format:
+    byte version (0)
+    LeafSet ls
+    boolean request
+    int numInFailedSet
+      NodeHandle failedHandle
+      
+1.7.3: LeafSet Maintenance ****************************************************
+RequestLeafSet:
+  address: 0xf921def1 (Leafset Protocol)
+  type: 1
+  use: Leafset Maintenance
+  package: rice.pastry.leafset
+
+  format: 
+    byte version (0)
+    long timestamp
+      
+BroadcastLeafSet:
+  address: 0xf921def1 (Leafset Protocol)
+  type: 2
+  use: Leafset Maintenance
+  package: rice.pastry.leafset
+
+  format:
+    byte version (0)
+    NodeHandle fromNode
+    LeafSet leafSet
+    int theType
+    long timestamp // based on the request's timestamp, 0 if self-initiated
+
+1.7.4: Routing Table Maintenance **********************************************
+RequestRouteRow:
+  address: 0x89ce110e (Route Protocol)
+  type: 1
+  use: Routing Table Maintenance
+  package: rice.pastry.routing
+
+  format: 
+    byte version (0)
+    short row // the row requested
+    
+BroadcastRouteRow:
+  address: 0x89ce110e (Route Protocol)
+  type: 2
+  use: Routing Table Maintenance
+  package rice.pastry.routing
+    
+  format:
+    byte version (0)
+    NodeHandle fromNode  
+    // encoding a sparse array
+    int numRouteSets
+    // for each routeSet
+      boolean notNull
+      // if (notNull)
+        RouteSet set
+
+1.7.5 CommonAPI impl **********************************************************
+PastryEndpointMessage:
+  address: taken from the underlieing endpoint
+  type: 2
+  use: Adapt a CommonAPI message to FreePastry (Adds an address) wraps the message
+  package: rice.pastry.commonapi
+  
+  format:
+    byte version (0)
+    byte priority
+    short type (the type of the sub message)
+    CommonAPIMessage message
+    
+1.8: Direct Access Messages ***************************************************
+These are messages used to directly read the state of the pastry node remotely.  They are used during bootstrap, and to check the liveness.  
+They are all address 0.
+
+LeafSetRequestMessage:
+  type: 4
+  use: request a LeafSet from a node
+  format:
+    byte version (0)
+
+LeafSetResponseMessage:
+  type: 5
+  use: respond to a LeafSetRequest
+  format:
+    byte version (0)
+    LeafSet leafset
+
+NodeIdRequestMessage:
+  type: 6
+  use: request the Id of a node
+  format:
+    byte version (0)
+
+NodeIdResponseMessage:
+  type: 7
+  use: respond to a NodeIdRequest
+  format:
+    byte version (0)
+    Id nodeId
+    long epoch
+    
+RouteRowRequestMessage:
+  type: 10
+  use: request a Row from a Routing Table
+  format:
+    byte version (0)
+    int row (the row requested)
+
+RouteRowResponseMessage:
+  type: 11
+  use: respond to a RouteRowRequest
+  format:
+    byte version (0)
+    // encoding a sparse array
+    int numRouteSets
+    // for each routeSet
+      boolean notNull
+      // if (notNull)
+        RouteSet set
+        
+RoutesRequestMessage:
+  type: 12
+  use: request SourceRoutes from another node
+  format:
+    byte version (0)
+
+RoutesResponseMessage:
+  type: 13
+  use: respond to a RoutesRequest
+  format:
+    byte version (0)
+    int numRoutes
+    // for each route
+      SourceRoute sourceRoute
+        
+SourceRoute:
+  // source route is a Message type for convenience (otherwise we'd have to have special headers and stuff)  Sometimes the protocol just sends a SourceRoute       
+  type: 1
+  use: Holds a SourceRoute
+  format:
+    byte version (0)
+    int numInPath
+    // for each hop
+      EpochInetSocketAddress address
+
+1.9: Liveness Messages (UDP) **************************************************
+For Liveness and NAT (Network Address Translator) handling
+Note that this doesn't make NAT traversal automatic, but just allows FreePastry to detect the external address, port forwarding must be set up
+
+1.9.1 Header overview *********************************************************
+The format of these messages is a bit different because they are UDP and need to carry source route info at each step:  
+Header contains 3 things:
+  1) Magic Number byte[4]
+  2) Protocol version int (0)
+  3) Source Route
+  4) Message Header
+  
+1.9.2 Header specification ****************************************************  
+Detail:  
+  // Magic Number
+  byte[4] PASTRY_MAGIC_NUMBER = {0x27, 0x40, 0x75, 0x3A}
+      
+  // Protocol Version (0) for now, but this may become more interesting in the future, such as being in part, a bitwise selection
+  int 0
+
+  // source route part
+  byte 1 // the current hop counter (incremented at each step)
+  byte numHops // in the source route
+  short size // of the following EpochInetSocketAddresses
+  EpochInetSocketAddress first address
+  // for each hop
+    EpochInetSocketAddress hop
+
+  // Message Header Part
+  int address
+  boolean hasSender
+  byte priority
+  short type (app specific)
+  // if hasSender
+    NodeHandle sender
+  
+1.9.3 Messages
+  IPAddressRequestMessage:
+    type: 2
+    use:  Used to figure out your external address (like if you are behind a NAT)
+    format:
+      time sentTime
+      
+  IPaddressResponseMessage:
+    type: 3
+    use: Used to respond to the IpAddress
+    format:
+      time sentTime
+      byte[4] inetaddress // the address that this message came from
+      int port // the port that this message came from
+      
+  PingMessage:
+    type: 8
+    use: Determine Round Trip Time (RTT)
+    format:
+      time sentTime
+      
+  PingResponseMessage:
+    type: 9
+    use: respond to determine RTT
+    format:
+      time requestTime
+      
+  WrongEpochMessage:    
+    type 14
+    use: notify that this process is not who you think it is
+    format:
+      time sentTime
+      EpochInetSocketAddress incorrect
+      EpochInetSocketAddress correct
+
+
+Chapter 2 CommonApi Apps ******************************************************
+2.1 Scribe ********************************************************************
+2.1.1 Scribe Objects **********************************************************
+  Topic:
+    use:  This class represents a specific topic in the Scribe system.
+    format:
+      short idType
+      Id id
+  ScribeContent:
+    use: The "user-defined" payload of the scribe message.  (Note: User is a 
+      developer who uses scribe in their higher level application.)
+    format: user defined, no required fields, but must declare a type
+    
+2.1.2 Content Messages *********************************************************
+          
+  PublishRequestMessage:    
+    type 9
+    use: request publication of a ScribeContent    
+    format:
+      byte version (0)
+      boolean hasSource
+        NodeHandle source
+      Topic topic
+      short contentType
+      ScribeContent payload
+      
+  PublishMessage:    
+    type 8
+    use: multicast of a ScribeContent    
+    format:
+      byte version (0)
+      boolean hasSource
+        NodeHandle source
+      Topic topic
+      short contentType
+      ScribeContent payload
+      
+  AnycastMessage:    
+    type 1
+    use: anycast a ScribeContent, has a list of nodes to visit, and a "passport" of visited nodes
+    format:
+      byte version (0)
+      boolean hasSource
+        NodeHandle source
+      Topic topic
+      
+      // array of NodeHandles to visit
+      int toVisitLength
+        // for each toVisitLength
+        NodeHandle node
+      
+      // array of NodeHandles to visit
+      int visitedLength
+        // for each visitedLength
+        NodeHandle node
+      
+      boolean hasContent
+        // if hasContent
+        short contentType
+        ScribeContent payload
+      
+2.1.3 Tree Formation Messages *************************************************
+  SubscribeMessage:    
+    type 2
+    use: anycast a request to join a tree, format is very similar to an 
+      AnycastMessage and can likely use a common code path
+    format:
+      byte version (0)
+      boolean hasSource
+        NodeHandle source
+      Topic topic
+      
+      // array of NodeHandles to visit
+      int toVisitLength
+        // for each toVisitLength
+        NodeHandle node
+      
+      // array of NodeHandles to visit
+      int visitedLength
+        // for each visitedLength
+        NodeHandle node
+
+      boolean hasContent
+        // if hasContent
+        short contentType
+        ScribeContent payload
+      
+      int id // unique id of the request
+      
+      boolean hasPreviousParent
+      // if hasPreviousParent
+        Id previousParent  
+                
+      NodeHandle subscriber
+            
+  SubscribeAckMessage:    
+    type 3
+    use: Acknowledge a SubscribeMessaege. (sent by the node that accepts the anycasted subscribe)    
+    format:
+      byte version (0)
+      boolean hasSource
+        NodeHandle source
+      Topic topic
+      int id // matches the id of the request
+      
+      // list of the path to the root
+      int lengthOfPath
+      // for each lengthOfPath
+        Id nodeId
+      
+  SubscribeFailedMessage:    
+    type 4
+    use: Sent when the subscribe attempt fails, (based on the ScribePolicy, there are no available candidates to join from)
+    format:
+      byte version (0)
+      boolean hasSource
+        NodeHandle source
+      Topic topic
+      int id // matches the id of the request
+      
+  UnsubscribeMessage:    
+    type 10
+    use: Unsubscribe from a topic.    
+    format:
+      byte version (0)
+      boolean hasSource
+        NodeHandle source
+      Topic topic
+      
+  DropMessage:    
+    type 6
+    use: Tells a child that it's parent can no longer support it.    
+    format:
+      byte version (0)
+      boolean hasSource
+        NodeHandle source
+      Topic topic
+      
+2.2 Past **********************************************************************
+2.2.1 Past Objects ************************************************************
+  PastContent:
+    use: The "user-defined" content of the DHT.  (Note: User is a 
+      developer who uses Past in their higher level application.)
+    format: user defined, no required fields, but must declare a type
+  PastContentHandle:
+    use: The "user-defined" content identifier of the DHT.  (Note: User is a 
+      developer who uses Past in their higher level application.)
+    format: user defined, no required fields, but must declare a type
+  
+2.1.2 Past Messages ***********************************************************
+  CacheMessage:    
+    type 1
+    use: Pushes an object forward one hop in order to be cached.   
+    format:
+      byte version (0)
+      int id // unique id of this message
+      short idType // the type of the dest (next value)
+      Id dest // the destination of this request
+      NodeHandle source // the source of this request
+      boolean isResponse // if this is a response     
+      PastContent content // the content of this cache request
+      
+  FetchHandleMessage:    
+    type 2
+    use: Request a PastContentHandle based on an Id (both request/response).   
+    format:
+      byte version (0)
+      int id // unique id of this message
+      short idType // the type of the dest (next value)
+      Id dest // the destination of this request
+      NodeHandle source // the source of this request
+      boolean isResponse // if this is a response     
+      
+      byte hasContentHandle // 0=empty; 1=true; 2=error; 3=platform dependent PastContentHandle
+        // if hasContentHandle = 1
+        PastContentHandle handle 
+        // else, if hasContentHandle = 2
+        int errorLength 
+        byte[errorLength] // platform dependent error message
+        
+      short idType
+      Id id // the Id to fetch     
+  
+  FetchMessage:    
+    type 3
+    use: Request a PastContent based on a PastContentHandle (both request/response).   
+    format:
+      byte version (0)
+      int id // unique id of this message
+      short idType // the type of the dest (next value)
+      Id dest // the destination of this request
+      NodeHandle source // the source of this request
+      boolean isResponse // if this is a response     
+      
+      byte hasContent // 0=empty; 1=true; 2=error; 3=platform dependent PastContent
+        // if hasContent = 1
+        PastContent content 
+        // else, if hasContent = 2
+        int errorLength 
+        byte[errorLength] // platform dependent error message
+        
+      boolean cached // if this is a cached copy  
+      short contentHandleType
+      PastContentHandle handle // the content to fetch     
+  
+  InsertMessage:    
+    type 4
+    use: Inserts a PastContent (both request/response), the request has a content, the response doesn't.   
+    format:
+      byte version (0)
+      int id // unique id of this message
+      short idType // the type of the dest (next value)
+      Id dest // the destination of this request
+      NodeHandle source // the source of this request
+      boolean isResponse // if this is a response     
+      
+      byte responseType // 0=empty; 1=non-empty; 2=error
+        // if responseType = 1
+        boolean success 
+        // else, if responseType = 2
+        int errorLength 
+        byte[errorLength] // platform dependent error message
+        
+      boolean hasContent
+      // if hasContent
+        short contentType
+        PastContent content        
+  
+  LookupHandlesMessage:    
+    type 5
+    use: Gets all the handles of an Id.   
+    format:
+      byte version (0)
+      int id // unique id of this message
+      short idType // the type of the dest (next value)
+      Id dest // the destination of this request
+      NodeHandle source // the source of this request
+      boolean isResponse // if this is a response     
+      
+      byte hasNodeHandleSet // 0=empty; 1=non-empty; 2=error
+        // if hasNodeHandleSet = 1
+        short setType
+        NodeHandleSet set       
+        // else, if hasNodeHandleSet = 2
+        int errorLength 
+        byte[errorLength] // platform dependent error message
+                
+      int max // the number of replicas to fetch
+      short idType // the type of the id (next value)
+      Id id // the Id to fetch     
+  
+  LookupMessage:    
+    type 6
+    use: Looks up a PastContent from an id (both request/response), the response has a content, the request doesn't.   
+    format:
+      byte version (0)
+      int id // unique id of this message
+      short idType // the type of the dest (next value)
+      Id dest // the destination of this request
+      NodeHandle source // the source of this request
+      boolean isResponse // if this is a response     
+      
+      byte hasPastContent // 0=empty; 1=non-empty; 2=error
+        // if hasPastContent = 1
+        short contentType
+        PastContent pastContent       
+        // else, if hasNodeHandleSet = 2
+        int errorLength 
+        byte[errorLength] // platform dependent error message
+                
+      boolean hasHandle
+        NodeHandle handle // where this message has been        
+      short idType // the type of the id (next value)
+      Id id // the id to fetch
+      boolean cached // whether or not this message has been cached
+  
+2.2 GCPast ********************************************************************
+2.2.1 GCPast Objects **********************************************************
+  GCId 
+    type 3
+    use: Holds an id and an expiration, used to refresh Ids
+    short idType // the type of the id (next value)
+    Id id
+    time expiration
+
+2.2.2 GCPast Messages *********************************************************
+  GCRefreshMessage:    
+    type 11
+    use: A request to extend the lifetime of a set of keys stored in GCPast.   
+    format:
+      byte version (0)
+      int id // unique id of this message
+      short idType // the type of the dest (next value)
+      Id dest // the destination of this request
+      NodeHandle source // the source of this request
+      boolean isResponse // if this is a response     
+      
+      byte responseType // 0=empty; 1=non-empty; 2=error
+        // if responseType = 1
+        int numResponses
+        boolean[] success 
+        // else, if responseType = 2
+        int errorLength 
+        byte[errorLength] // platform dependent error message
+        
+
+      int numKeys
+      // for each numKey
+        short idType // the type of the id (next value)
+        GCId gcid 
+        
+        
+  GCInsertMessage:    
+    type 9
+    use: Inserts a PastContent (both request/response), the request has a content, the response doesn't.   
+    format:
+      byte version (0)
+      int id // unique id of this message
+      short idType // the type of the dest (next value)
+      Id dest // the destination of this request
+      NodeHandle source // the source of this request
+      boolean isResponse // if this is a response     
+      
+      byte responseType // 0=empty; 1=non-empty; 2=error
+        // if responseType = 1
+        boolean success 
+        // else, if responseType = 2
+        int errorLength 
+        byte[errorLength] // platform dependent error message
+        
+
+      boolean hasContent
+      // if hasContent
+        short contentType
+        PastContent content   
+      
+      time expiration     
+        
+  GCLookupHandlesMessage:    
+    type 10
+    use: Gets all the handles of an Id.   
+    format:
+      byte version (0)
+      int id // unique id of this message
+      short idType // the type of the dest (next value)
+      Id dest // the destination of this request
+      NodeHandle source // the source of this request
+      boolean isResponse // if this is a response     
+      
+      byte hasNodeHandleSet // 0=empty; 1=non-empty; 2=error
+        // if hasNodeHandleSet = 1
+        short setType
+        NodeHandleSet set       
+        // else, if hasNodeHandleSet = 2
+        int errorLength 
+        byte[errorLength] // platform dependent error message
+                
+      int max // the number of replicas to fetch
+      short idType
+      Id id // the Id to fetch     
+  
+2.3 Replication ***************************************************************
+  RequestMessage:    
+    type 2
+    use: Requests a set of keys.   
+    format:
+      byte version (0)
+      NodeHandle source
+      int numFilters
+        BloomFilter filter
+      int ranges
+        IdRange range
+  
+  ResponseMessage:    
+    type 3
+    use: Response to a RequestMessage.   
+    format:
+      byte version (0)
+      NodeHandle source
+      // a 2D matrix of Ids
+      int numRows
+        int numCols
+          short idType
+          Id id
+      // list of IdRange
+      int numRanges
+        IdRange range
+          
+            
+2.4 Multiring *****************************************************************    
+Multiring doesn't use any specific messages, but it does define a new object: 
+RingId and a ScribeContent (RingMessage) which is anycasted to get to the 
+appropriate ring.
+
+  RingId: (A type of Id)
+    type: 2
+    short ringIdType
+    Id ringId // the ring
+    short idType
+    Id id // the id in the ring
+
+  RingMessage (a ScribeContent):
+    type: 1 
+    format:
+      RingId id
+      String application
+      short messageType
+      byte priority
+      Message message
+      
+  MultiringNodeHandleSet: (A type of NodeHandleSet)
+    type: 10
+    format: 
+      short idType
+      Id ringId
+      short internalNodeHandleSetType
+      NodeHandleSet set      
+  
+2.5 Glacier *******************************************************************
+2.5.1 Glacier Objects *********************************************************
+  Fragment:
+    use:
+    format:
+      int length
+      byte[length] payload
+      
+  VersionKey:    
+    use:
+    format:
+      long version
+      Id id
+      
+  FragmentKey:
+    use:
+    format:
+      int id
+      VersionKey key
+      
+  Manifest:
+    use:
+    format:
+      int objectHashLength
+      int fragmentHashArrayLength
+      int fragmentHashLength
+      int signatureLength
+      byte[objectHashLength] objectHash
+      // for each fragmentHashArrayLength
+        byte[fragmentHashLength] fragmentHash
+      byte[signatureLength] signature
+
+2.5.2 Glacier Messages ********************************************************      
+  GlacierDataMessage:
+    use:
+    type 1    
+    format:
+      byte version (0)      
+      int id
+      char tag
+      boolean isResponse
+      short idType
+      Id dest
+      NodeHandle source
+      
+      int numFragments
+        Fragment fragment
+      int numFragmentKeys
+        FragmentKey fragmentKey
+      int numManifests
+        Manifest manifest
+            
+  GlacierFetchMessage:
+    use:
+    type 2    
+    format:
+      byte version (0)      
+      int id
+      char tag
+      boolean isResponse
+      short idType
+      Id dest
+      NodeHandle source
+      
+      int request
+      int numFragmentKeys
+        FragmentKey fragmentKey            
+  
+  GlacierNeighborRequestMessage:
+    use:
+    type 3    
+    format:
+      byte version (0)            
+      int id
+      char tag
+      boolean isResponse
+      short idType
+      Id dest
+      NodeHandle source
+      
+      IdRange requestedRange
+  
+  GlacierNeighborResponseMessage:
+    use:
+    type 4    
+    format:
+      byte version (0)            
+      int id
+      char tag
+      boolean isResponse
+      short idType
+      Id dest
+      NodeHandle source
+      
+      int numLastSeen
+        long lastSeen
+      int numNeighbors
+        Id neighbor  
+  
+  GlacierNeighborResponseMessage:
+    use:
+    type 5    
+    format:
+      byte version (0)            
+      int id
+      char tag
+      boolean isResponse
+      short idType
+      Id dest
+      NodeHandle source
+      
+      int numFragmentKeys
+        FragmentKey fragmentKey
+  
+  GlacierRangeForwardMessage:
+    use:
+    type 6    
+    format:
+      byte version (0)            
+      int id
+      char tag
+      boolean isResponse
+      short idType
+      Id dest
+      NodeHandle source
+      
+      IdRange requestedRange
+      NodeHandle requestor      
+  
+  GlacierRangeQueryMessage:
+    use:
+    type 7    
+    format:
+      byte version (0)            
+      int id
+      char tag
+      boolean isResponse
+      short idType
+      Id dest
+      NodeHandle source
+      
+      IdRange requestedRange
+  
+  GlacierRangeResponseMessage:
+    use:
+    type 8    
+    format:
+      byte version (0)            
+      int id
+      char tag
+      boolean isResponse
+      short idType
+      Id dest
+      NodeHandle source
+      
+      IdRange commonRange
+  
+  GlacierRefreshCompleteMessage:
+    use:
+    type 9    
+    format:
+      byte version (0)            
+      int id
+      char tag
+      boolean isResponse
+      short idType
+      Id dest
+      NodeHandle source
+      
+      int numUpdates
+        int update
+      int numVersionKeys
+        VersionKey versionKey
+  
+  GlacierRefreshPatchMessage:
+    use:
+    type 10    
+    format:
+      byte version (0)            
+      int id
+      char tag
+      boolean isResponse
+      short idType
+      Id dest
+      NodeHandle source
+      
+      int numLifeTimes
+        long lifeTime
+      int numVersionKeys
+        VersionKey versionKey
+      int numSignatures
+        int signatureLength
+        byte[signatureLength] signature
+  
+  GlacierRefreshProbeMessage:
+    use:
+    type 11    
+    format:
+      byte version (0)            
+      int id
+      char tag
+      boolean isResponse
+      short idType
+      Id dest
+      NodeHandle source
+      
+      short idType
+      Id requestedId
+  
+  GlacierRefreshResponseMessage:
+    use:
+    type 12    
+    format:
+      byte version (0)            
+      int id
+      char tag
+      boolean isResponse
+      short idType
+      Id dest
+      NodeHandle source
+      
+      IdRange range
+      boolean online        
+  
+  GlacierResponseMessage:
+    use:
+    type 13    
+    format:
+      byte version (0)            
+      int id
+      char tag
+      boolean isResponse
+      short idType
+      Id dest
+      NodeHandle source
+      
+      int numFragmentKeys
+        FragmentKey fragmentKey
+      int numLifetimes
+        long lifetime
+      int numAuthoritatives
+        boolean authoritative
+      int numHaveIts
+        boolean haveIt
+        
+  GlacierSyncMessage:
+    use:
+    type 14    
+    format:
+      byte version (0)            
+      int id
+      char tag
+      boolean isResponse
+      short idType
+      Id dest
+      NodeHandle source
+      
+      int offsetFID
+      IdRange range
+      BloomFilter bloomFilter
+                
+          
+2.6 Aggregation ***************************************************************
+Note that Aggregation doesn't define any new messages, but it does define a GCPastContent.
+
+  Aggregate (A GCPastContent):
+    use: convert lots of small GCPastContents into a larger one
+    type 1
+    format:
+      byte version (0)
+      short idType
+      Id myId
+      int numPointers
+        short idType
+        Id pointer
+      int numComponents
+        short GCPastContentType
+        GCPastContent
+        
+  NonAggregate (A GCPastContent):
+    use: wrap a GCPastContent (to prevent type space collision)
+    type 2
+    format:
+      byte version (0)
+      short GCPastContentType
+      GCPastContentType content
+        
+2.7 Splitstream ***************************************************************
+Doesn't define any new messages, but does define 2 ScribeContents
+
+  SplitStreamContent (A ScribeContent):
+    use: Send data through scribe
+    format:
+      byte version (0)
+      int numBytes
+      byte[numBytes] data
+  
+  SplitStreamSubscribeContent (A ScribeContent):
+    use: Send data through scribe during a subscribe
+    format:
+      byte version (0)
+      int stage

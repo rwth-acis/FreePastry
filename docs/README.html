@@ -1,0 +1,993 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html><head>
+  <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type"><title>FreePastry</title>
+</head>
+<body style="font-family: Verdana,Arial;" alink="#ff0000" bgcolor="#ffffff" link="#0000ee" text="#000000" vlink="#551a8b">
+<h2>
+<center>
+<h1><font size="+4">FreePastry release notes</font></h1>
+<hr size="2" width="100%"></center>
+Release 2.1,&nbsp; 13 March, 2009.
+</h2>
+<p>FreePastry is a modular, open source implementation of the <a href="http://freepastry.org/"> Pastry</a> p2p structured overlay network. <br>
+&nbsp; </p>
+<h3> Contributors</h3>
+<a href="http://www.mpi-sws.mpg.de/people/Peter_Druschel">Peter Druschel</a>, 
+Eric Engineer , 
+Romer Gil , 
+<a href="http://www.mpi-sws.mpg.de/people/Andreas_Haeberlen">Andreas Haeberlen</a>, 
+<a href="http://www.mpi-sws.mpg.de/people/Jeff_Hoye">Jeff Hoye</a>, 
+<a href="http://www.cs.rice.edu/%7Eychu/">Y. Charlie Hu</a> , 
+<a href="http://www.cs.rice.edu/%7Essiyer/">Sitaram Iyer</a> , 
+<a href="http://www.cs.rice.edu/%7Ealadd/">Andrew Ladd</a> ,
+<a href="http://www.mpi-sws.mpg.de/people/Alan_Mislove">Alan Mislove</a>, 
+<a href="http://www.cs.rice.edu/%7Eanimesh">Animesh Nandi</a> , 
+<a href="http://www.mpi-sws.mpg.de/people/Ansley_Post">Ansley Post</a>, 
+<a href="http://www.cs.rice.edu/%7Ecreis">Charlie Reis</a> , 
+<a href="http://www.cs.rice.edu/%7Edsandler">Dan Sandler</a> ,
+<a href="http://www.mpi-sws.mpg.de/people/James_Stewart">Jim Stewart</a>, 
+<a href="http://www.cs.rice.edu/%7Eatuls">Atul Singh</a> , and 
+<a href="http://composer.ecn.purdue.edu/%7Erongmei/">RongMei Zhang</a>
+contributed to the FreePastry code. The code is based on algorithms and
+protocols described in the following papers: <br>
+&nbsp;
+<ul>
+  <li><font face="Helvetica, Arial, sans-serif">A. Rowstron and P.
+Druschel, <i>Pastry: Scalable, distributed object location and routing
+for large-scale   peer-to-peer systems</i>.&nbsp; IFIP/ACM International
+Conference on Distributed   Systems Platforms (Middleware), Heidelberg,
+Germany, pages 329-350, November,   2001. [<i><a href="http://www.research.microsoft.com/%7Eantr/PAST/pastry.pdf.zip">
+pdf.zip</a> | <a href="http://www.research.microsoft.com/%7Eantr/PAST/pastry.ps.zip">
+ps.zip</a> | <a href="http://www.research.microsoft.com/%7Eantr/PAST/pastry.pdf"> pdf</a>
+| <a href="http://www.research.microsoft.com/%7Eantr/PAST/pastry.ps"> ps</a> </i>]</font></li>
+</ul>
+<ul>
+<!--
+  <li><font face="Helvetica, Arial, sans-serif">M. Castro, P. Druschel,
+Y. C. Hu, A. Rowstron, <i>Exploiting network proximity in peer-to-peer
+overlay networks</i>.&nbsp; Microsoft Technical Report MSR-TR-2002-82, 2002.&nbsp; 
+[<i>
+ <a href="http://freepastry.rice.edu/PAST/location.pdf.zip">pdf.zip</a> 
+|<a href="http://freepastry.rice.edu/PAST/location.ps.zip"> ps.zip</a> 
+|<a href="http://freepastry.rice.edu/PAST/location.pdf">pdf</a> 
+|<a href="http://freepastry.rice.edu/PAST/location.ps">ps</a> 
+</i>]</font></li>
+--> 
+  <li><font face="Helvetica, Arial, sans-serif">M. Castro, P. Druschel,
+Y. C. Hu, A. Rowstron, <i>Proximity neighbor selection in tree-based structured peer-to-peer overlays</i>.&nbsp; Microsoft Technical Report MSR-TR-20032-52, 2003.&nbsp; 
+[<i>
+ <a href="http://freepastry.rice.edu/PAST/location-msrtr-2003-52.zip">pdf.zip</a> 
+|<a href="http://freepastry.rice.edu/PAST/location-msrtr-2003-52.ps.zip"> ps.zip</a> 
+|<a href="http://freepastry.rice.edu/PAST/location-msrtr-2003-52.pdf">pdf</a> 
+|<a href="http://freepastry.rice.edu/PAST/location-msrtr-2003-52.ps">ps</a> 
+</i>]</font></li>
+</ul>
+<ul>
+  <li><font face="Helvetica, Arial, sans-serif"> M. Castro, P. Druschel,
+ A.-M.  Kermarrec&nbsp; and A. Rowstron, "<i>SCRIBE: A large-scale and
+decentralized application-level multicast infrastructure</i>", IEEE
+Journal on Selected  Areas  in Communications (JSAC) (Special issue on
+Network Support for Multicast   Communications). 2002, to appear.&nbsp; [<i><a href="http://www.research.microsoft.com/%7Eantr/PAST/jsac.pdf.zip">
+pdf.zip</a> | <a href="http://www.research.microsoft.com/%7Eantr/PAST/jsac.ps.zip">
+ps.zip</a> | <a href="http://www.research.microsoft.com/%7Eantr/PAST/jsac.pdf">pdf</a>
+| <a href="http://www.research.microsoft.com/%7Eantr/PAST/jsac.ps">ps</a> </i>
+]</font></li>
+</ul>
+<ul>
+  <li><font style="font-family: helvetica,arial,sans-serif;">A.
+Rowstron and P. Druschel, "<i>Storage management and caching in PAST, a
+large-scale, persistent       peer-to-peer storage utility</i>", 18th
+ACM SOSP'01, Lake Louise, Alberta, Canada, October 2001.&nbsp; [<i> <a href="http://www.cs.rice.edu/CS/Systems/PAST/past-sosp.pdf.zip">pdf.zip</a>
+| <a href="http://www.cs.rice.edu/CS/Systems/PAST/past-sosp.ps.zip">ps.zip</a>
+| <a href="http://www.cs.rice.edu/CS/Systems/PAST/past-sosp.pdf">pdf</a>
+| <a href="http://www.cs.rice.edu/CS/Systems/PAST/past-sosp.ps">ps</a> </i>
+] (Corrected - erratum for original version: <i>&nbsp;<a href="http://www.cs.rice.edu/CS/Systems/PAST/sosp-erratum.ps">ps</a>)</i></font><br style="font-family: helvetica,arial,sans-serif;">
+  </li>
+</ul>
+<ul>
+  <li>
+<font style="font-family: helvetica,arial,sans-serif;">
+F. Dabek,
+P. Druschel, B. Zhao, J. Kubiatowicz, and I. Stoica, "<i>Towards a
+Common API for Structured Peer-to-Peer Overlays</i>", 2nd IPTP'03,
+Berkeley, CA, February, 2003.&nbsp;
+[<i> <a href="http://www.cs.rice.edu/%7Edruschel/publications/kbr-api.pdf">pdf</a></i>
+]</font></li>
+
+</ul>
+<ul>
+<li>
+<font style="font-family: helvetica,arial,sans-serif;">
+Miguel Castro, Peter Druschel, Anne-Marie Kermarrec, Animesh Nandi, Antony Rowstron and Atul Singh,
+<i> SplitStream: High-bandwidth multicast in a cooperative environment. </i>
+ In Proceedings of the 19th ACM Symposium on Operating Systems Principles (SOSP'03). Lake George, New York, October 2003.
+[<i> <a href="http://freepastry.rice.edu/PAST/SplitStream-results.pdf">pdf </a></i>]
+</font>
+</li>
+</ul>
+<ul>
+<li>
+<font style="font-family: helvetica,arial,sans-serif;">
+Andreas Haeberlen, Jeff Hoye, Alan Mislove, and Peter Druschel,
+<i> Consistent Key Mapping in Structured Overlays. </i> Technical Report TR05-456, Department of Computer Science, Rice University, forthcoming.
+[ <i><a href="http://freepastry.rice.edu/papers/consistency.pdf">pdf</a></i> ]
+</li>
+</ul>
+
+<h3>Requirements</h3>
+The software requires a Java runtime, version 1.5.0+. The software was
+developed using Sun's SDK, version 1.5.0+
+
+<h3>Changes since release 2.1-beta</h3>
+<ul>
+  <li>New Transport Layers</li>
+  <ul>
+    <li>SSL Transport Layer, Certificate Authority, Tutorial</li>
+  </ul>      
+  <li>Tutorials</li>
+  <ul>
+    <li>Can construct applications before booting the node, which prevents message loss due to the app not being registered.</li>
+    
+<br/><br/>The old code looked like this:
+<pre>
+  InetAddress bootAddress; // the address to boot from (initialized elsewhere)
+  PastryNodeFactory factory;  // initialized elsewhere
+  NodeHandle bootHandle = factory.getNodeHandle(bootAddress);
+  PastryNode node = factory.newNode(bootHandle); // boots the node
+  new MyApp(node); // registers the app
+</pre>
+
+Now the code looks like this:
+<pre>
+  InetAddress bootAddress; // the address to boot from (initialized elsewhere)
+  PastryNodeFactory factory;  // initialized elsewhere
+  PastryNode node = factory.newNode(); // does not boot the node
+  new MyApp(node); // registers the app
+  node.boot(bootAddress); // boot the node
+</pre>
+
+    <li>Boot nodes constructed from the <b>SocketPastryNodeFactory</b> with an <b>InetSocketAddress</b>, or <b>Collection&lt;InetSocketAddress&gt;</b></li>    
+    <li>Boot nodes constructed from the <b>DirectPastryNodeFactory</b> (simulator) with a <b>NodeHandle</b> (as before), or <b>Collection&lt;NodeHandle&gt;</b></li>
+    <li>New Tutorials</b></li>
+  </ul>      
+</ul>
+
+<h3>Changes since release 2.1alpha3</h3>
+<ul>
+  <li>Support for NATs w/o using UPnP</li>
+  <ul><li>rice.pastry.socket.nat.rendezvous.RendezvousSocketPastryNodeFactory -- Will relay traffic for NATted nodes.</li>
+      <li>rice.pastry.socket.internet.InternetPastryNodeFactory -- Autoconfigures RendezvousSocketPastryNodeFactory</li></ul>      
+</ul>
+<p/>Many Bug Fixes, including:
+<ul>
+  <li>Fixed bug causing newNode to stall/deadlock on some versions of linux.</li>
+  <li>Fixed a problem with replication in the PastryEndpoint.</li>
+  <li>Can boot from a NATted node as long as it has proper port forwarding.</li>
+</ul>
+
+<h3>Changes since release 2.1alpha2</h3>
+<ul>
+  <li>Various bug fixes</li>  
+  <li>Fixed several long term stability problems in TransportLayer and Scribe</li>
+  <li>Added Layer to limit sockets, to prevent FileDescriptor exhaustion</li>
+  <li>PeerReview for Record/Replay</li>
+  <li>Transport layer much easier to extend</li>
+</ul>
+
+<h3>Changes since release 2.1alpha</h3>
+<ul>
+  <li>Various bug fixes</li>
+  <li>Simulator is a Transport Layer</li>
+</ul>
+
+<h3>Changes since release 2.0_02</h3>
+<h4>Features:</h4>
+  <ul>
+    <li><b>New modular transport layer:</b>
+    <ul>
+      <li>superior sender side notification of pending messages</li>
+      <li>breaks up implementation in to more manageable/maintainable components
+      <ul>
+        <li>more hackable</li>
+      </ul></li>
+      <li>allows for easier implementation of new features:
+      <ul>
+      
+        <li>security:
+		<ul>        
+          <li>SSL
+          <li>PeerReview
+	    </ul></li>
+	    
+        <li>flexibility:
+	    <ul>
+          <li>STUN
+          <ul>
+            <li>support for udp messages</li>          
+	       </ul></li>
+          <li>simulation:
+          <ul>
+            <li>more control of how much of the transport layer is simulated</li>
+	      </ul></li>
+	    </ul></li>	 
+	    
+	  </ul></li>	 
+	</ul></li>	 
+	  
+    <li><b>New implementation of Scribe:</b>
+    <ul>
+      <li>allows user code to implement a tree maintenance policy</li>
+      <li>more efficient for large number of topics</li>
+	</ul></li>
+  </ul></li>
+	
+<h4>Limitations:</h4>
+<ul>
+    <li>API may change</li>
+    <li>memory leaks in new transport layer</li>
+    <li>may be buggy</li>
+    <li>not protocol-compatible with FP2.0 (will be working on a reverse compatibility layer for the full release)</li>
+    <li>Simulator does not support new features</li>
+    <li>No support for ProximityNeighborSelection during booting.</li>
+    <li>Existing NAT support may be broken</li>
+</ul>
+
+<h4>Upcoming changes:</h4>
+<ul>
+  <li>Simulator will become a layer.  This will allow simulation of the other layers in the protocol and ability to do bandwidth testing, see the effect of source routing.  (For example, a Firewall or NAT layer can be added to simulate the effects of assymetric connectivity in the simulator.)
+  <li>Socket will go away.  Currently all the old "socket" code is still in the codebase, but it is unused.
+  <li>PastryNode will be "final"  Currently, PastryNode is extended to SocketPastryNode, DirectPastryNode (for the simulator), TLPastryNode (for the new features).  The plan is to move the features of TLPastryNode into PastryNode and the DirectPastryNode into a layer, then delete all the remaining code.
+  <li>Factory interface may be deprecated:  
+  <ul>
+    <li>Currently the mechanism to boot a new node is <code>factory.newNode(factory.getNodeHandle(<InetSocketAddress>))</code>.  
+    This has to go away because in the new system, you may need credentials as a PastryNode to communicate with other members of a ring.  
+    The factory wouldn't have such credentials, becuase an Id will usually be associated with the credentials.  
+    For reverse compatibility, the existing PastryNodeFactories will return a stub NodeHandle that mearly contains the InetSocketAddress.</li>  
+    <li>The new way: <code>factory.newNode()</code> will return a new node, but does not cause any network traffic.  
+    At this point, you can register applications with FreePastry.  <code>pastryNode.boot(<InetSocketAddress>)</code> will cause 
+    the actual bootstrapping process.</li>
+  </ul></li>  
+  <li>Proximity Neighbor Selection during boot process.</li>
+  <li>Wireshark adapter</li>
+  <li>... more to come ...</li>
+</ul>
+
+<h4>Future features:</h4>
+<ul>
+  <li>Crypto layer</li>
+  <li>Bandwidth-limiting layer</li>
+</ul>
+
+<h4>new calls in CommonAPI:</h4>
+<ul>
+  <li><code>endpoint.route()</code>: returns a <code>rice.p2p.commonapi.MessageReceipt</code>, and can take a 
+    <code>rice.p2p.commonapi.DeliveryNotification</code>.</li>
+  <li><code>deliveryNotificaiton.sent()</code>/<code>sendFailed()</code> is called when the message is successful/unsuccessful</li>
+  <li><code>MessageReceipt.cancel()</code> can be called if it takes to long to send.  The combination of these objects can be 
+    used to gain fine grained control of bandwidth usage.   You can now determine how many messages are queued up, and cancel 
+    messages when needed.</li>
+    <br/>    
+
+  <li><code>endpoint.setSendOptions(Map)</code>: Used to specify transport-layer specific delivery options, 
+    such as <i>UDP</i>, <i>encrypted</i>, <i>"don't source-route"</i> etc.  Will only be respected if the transport layer chain 
+    supports the feature.  The only one currently available is UDP support.  Use this call to cause your endpoint to only send udp 
+    messages (I plan to make this simpler in the future):
+    <pre>
+    endpoint.setSendOptions(Collections.singletonMap(WireTransportLayer.OPTION_TRANSPORT_TYPE, WireTransportLayer.TRANSPORT_TYPE_DATAGRAM));
+    </pre></li>
+</ul>
+Note that if you want to send some messages UDP and some TCP then you should use two endponts for your application.  For example:
+<pre>
+    this.tcpendpoint = node.buildEndpoint(this, "myinstance-tcp");
+    this.udpendpoint = node.buildEndpoint(this, "myinstance-udp");
+    this.udpendpoint.setSendOptions(...);
+</pre>
+
+<h4>Overview of new TransportLayer interfaces:</h4>
+
+<br/>
+<b>org.mpisws.p2p.transport.TransportLayer(and Callback):</b>
+<ul>
+  <li>send/receive messages</li>
+  <li>open/accept sockets</li>
+    The socket is very similar to FreePastry's AppSocket interface.
+  <li>Has notification of messages sent, and socket's opened like the commonAPI.</li>
+</ul>
+
+<br/>
+<b>org.mpisws.p2p.transport.liveness.LivenessProvider:</b>
+  can return the known liveness of an entity, can check liveness, and can notify about changes in liveness
+
+<br/>
+<b>org.mpisws.p2p.transport.proximity.ProximityProvider:</b>
+  can return the known proximity of an entity, can notify about changes in proximity
+
+<h4>Overview of Layers used in TranportLayerPastryNodeFactory (which SocketPastryNodeFactory now extends):</h4>
+<ul>
+<li>.. <b>CommonAPI</b> ..
+<li>.. <b>FreePastry</b> ..
+<li><b>UpperIdentity</b> used keep track of the identity of a node at an address (this is complicated, 
+  and will have to be explained further in the future)</li>
+<li><b>CommonAPITransprotLayer</b> serializes/deserializes messages</li>
+<li><b>PriorityTransportlayer</b> sends messages over TCP, and utilizes MessagePriority for ordering</li>
+<li><b>SourceRouteManager</b> selects a source-route to use based on liveness/proximity</li>
+<li><b>LivenessLayer</b> probes a node, produces liveness/proximity</li>
+<li><b>LowerIdentity</b> used keep track of the identity of a node at an address (this is complicated, 
+  and will have to be explained further in the future)</li>
+<li><b>SourceRouteTransportLayer</b> can specify a route to a host along multiple overlay nodes</li>
+<li><b>MultiInetAddressTransportLayer</b> Used to support computers behind a NAT who may have multiple 
+  IPaddresses due to lack of hairpinning support  (similar to the EpochInetSocketAddress from 2.0, but doesn't have the epoch)</li>
+<li><b>MagicNumber</b> verifies that the messages are for FreePastry (not secure, just throws out trash)</li>
+<li><b>Wire</b> sends udp/tcp messages</li>
+<li>.. <b>Network</b> ..</li>
+</ul>
+
+<h3>Changes since release 2.0_01</h3>
+<p/><b>Bug fix in routing</b> -- When you routed to a key that fully matched the id of a node in the network, the routing table repair mechanism would throw a NPE.
+
+<h3>Changes since release 2.0</h3>
+<p/><b>Bug fix for consistency</b> -- When you called <code>endpoint.route(null,msg,target);</code> this message would still be dropped for possible consistency violations.  There is no violation for such a request because it is for a specific node.  This required an update to the Binary Format for the RouteMessage (version 1).  See the <a href="ProtocolSpec.txt">Protocol Specification</a> for the specific change.
+<p/>To gracefully upgrade a ring you can specify:
+<pre>
+pastry_protocol_router_routeMsgVersion = 0
+</pre>
+to force the routing protocol to send version 0 messags until the majority of your ring is properly upgraded.  Note that both versions 0 and 1 can still be received, but only version 0 will be sent, even if it receives a version 1 message.  Note that you will still be subject to the bug while using version 0.
+
+<h3>Changes since release 2.0beta2</h3>
+<ul>
+  <li>Documentation: 
+    <ul>
+      <li><a href="diagrams/">Diagrams</a> -- <i>see docs/visio/ in the source distribution</i></li>
+      <li>Wireshark dissector. Thanks to David Dugoujon -- <i>see tools/wireshark/ in the source distribution.</i><br/>
+      <i>Note: the FreePastry wireshark dissector is licensed under the GPL, not FreePastry's BSD-like license</i>
+      </li>  
+      <li><a href="ProtocolSpec.txt">Protocol Specification</a> -- <i>see docs/ProtocolSpec.txt in the source distribution</i></li>
+    </ul>
+  <li>Minor bug fixes.</li>
+</ul>
+  
+<h3>Changes since release 2.0beta</h3>
+<ul>
+  <li>Depends on Java 1.5 to use new features</li>
+  <li>Numerous Bug Fixes, Performance Optimizations, Documentation improvements.</li>  
+  <li>Tap interface for simulator: see <a href="javadoc20b2/rice/pastry/direct/SimulatorListener.html">SimulatorListener</a></li>
+  <li>Routing Consistency works much better</li>
+    <ul>
+    <li>Lots of evaluation on PlanetLab</li>
+	  <li><i>Note:</i>The PeriodicLeafSetProtocol is very low bandwidth and provides routing consistency in almost all situations other than network partitions.  However, the accuracy of the LeafSet is most accurate near the center.  This is because leafset changes are gossiped.  With the default setup, changes to the leafset may take over 4 minutes to propagate to all nodes.  However, your nearest neighbor to the left and right are guaranteed to be accurate.</li>  
+	  <li><i>Note:</i>The node may go ready and not ready depending on lease validity.  Not ready means that the node will not accept routing messages.  This is necessary to guarantee routing consistency.  To find out if you are ready, you can call PastryNode.isReady(), or register yourself as an Observer of the PastryNode.  You can expect a value of true when the node goes ready, and a value of false when it goes not-ready.</li>
+    </ul>
+  <li>Better support of NATs:
+    <ul>
+    <li>Integration of optional UPnP provider: <a href="http://www.sbbi.net/site/upnp/index.html">SBBI's UPNPLib</a></li>
+    <li>EpochInetSocketAddress supports a list of IP addresses to work properly with NATs that don't support hairpinning.</li>
+    </ul></li>
+  <li>FreePastry will scan the working directory for user.params to override the freepastry.params file in the jar</li>  
+</ul>
+  
+
+<h3>Changes since release 1.4.4</h3>
+<ul>
+  <li>Elimination of Java Serialization.  Is reverse compatible with the <i>code</i> of previous version, but the protocol is not reverse compatible.  Your application needs to implement rice.p2p.commonapi.rawserialization.RawMessage to gain the benefits of non-java serialization.</li>
+  <li>See <a href="ProtocolSpec.txt">docs/ProtocolSpec.txt</a> for the definition of the protocol.  Now FP can be ported to other languages...</li>
+  <li>Application level sockets.  Applications can now use their own socket which will be properly source-routed.  This allows applications to handle their own end-to-end communication for large messages and flow control.  See rice.tutorial.appsocket for an example of how to use this feature.</li>
+  <li>Application and Endpoint can be registered later to remove implicit registration that caused synchronization bugs during startup.  In other words, Node.registerApplication() was replaced with buildEndpoint() and you must call Endpoint.register() after you application has initialized its member variables.</li>
+  <li>Various other improvements.</li>
+</ul>
+
+<h3>Limitations of the beta.</h3>
+<ul>
+  <li>Needs profiling.</li>
+  <li>Protocol may still change slightly.</li>
+  <li>No documentation or tutorial for how to use Raw Serialization or Application level Sockets.</li>
+</ul>
+
+
+<h3>Changes since release 1.4.3_02</h3>
+<ul>
+  <li>Numerous bug fixes.</li>
+  <li>Added GT-ITM topology model.  See rice.pastry.dist.GenericNetwork.  It takes a file name which is the NxN array of proximities, tab or space delimited.</li>
+  <li>Made liveness checks work via random exponential backoff.</li>
+  <li>Can specify (max is leafset size) the number of Source Routes to use.  24 is probably too many and can lead to congestion collapse.  pastry_socket_srm_num_source_route_attempts is the parameter to set.  Default is 8.</li>
+  <li>Endpoint.range() now throws a RuntimeException (RangeCannotBeDeterminedException) if it doesn't have enough information to produce the requested range.</li>
+  <li>This is expected to be the last release that uses Java Serialization as the message format.</li>
+</ul>
+
+
+<h3>Changes since release 1.4.3_01</h3>
+This release is fixes some bugs with the direct simulator.  
+<ul>
+  <li>Fixed Environment Constructor in DirectPastryRegrTest and DirectPastryPingTest to use the proper TimeSource for the Direct Simulator.</li>
+</ul>
+
+
+<h3>Changes since release 1.4.3</h3>
+This release is fixes some bugs with the direct simulator.  
+<ul>
+  <li><b>Proximity NPE --</b> Fixed a bug that was throwing a null pointer exception in DirectNodeHandle.proximity() if DirectPastryNode.receiveMessage() was called outside of MessageDelivery.  This was based on a hack to make it so that proximity() worked again, which had been broken for some time.  But the hack was not pervasive enough.  It should be fine now.</li>
+  <li><b>SplitStream and Scribe are now Destructable</b> -- Necessary so that when you kill a node in the simulator, these apps give up their observer status on node handles, because they are now dead.  This was causing hashtable exceptions.</li>
+  <li>Fixed Environment Constructor in HelloWorld to use the proper TimeSource for the Direct Simulator.</li>
+  <li><b>Verified that nodes can be killed then re-joined with the same NodeId</b></li>
+</ul>
+
+
+<h3>Changes since release 1.4.2</h3>
+This release is primarily performance enhancements and bug fixes.  
+<ul>
+  <li><b>Faster logging --</b> Made FreePastry faster by hiding log
+operations behind conditionals.  This prevents a lot of unnecessary
+string garbage from being created when logging is partially or totally
+turned off.<br/><br/>
+<code>if (logger.level <= Logger.WARNING) logger.log("WARNING: There is a problem");</code>
+<br/><br/></li>
+  <li><b>Memory leak --</b> Fixed a memory leak in the transport layer
+which caused performance problems by forcing frequent garbage collection.  There were 2 WeakHashMaps that didn't always agree, and this was causing lots of objects to move into the tenured status in the generational garbage collector.  Also fixed some some long term memory leaks in the transport layer that would have come up if a system was running for a long time in a network with churn.</li>
+  <li><b>Increased the default number of allowed
+<tt>pastry_socket_scm_max_open_sockets</tt> sockets from 40 to
+300.</b>  This option limits the number of outgoing sockets that
+Pastry maintains.  The main reason to limit this value is to avoid
+running out of file descriptors.  The old value of 40 was causing
+thrashing in networks larger than 40 nodes.  A typical pastry node
+might be expected to use about 80 sockets: 24 for a leafset, 16 for
+the first row of the routing table, and some number of active
+connections to other nodes.  However, when a pastry node attempts to
+open more sockets and is limited there can be a performance problem
+which is why we set the default so high.  If your system runs out of
+sockets while running pastry try unlimiting the number of file
+descriptors in the operating system.  In Unix-alikes this is often via
+the shell command "ulimit -n".  If this still does not help, or you
+are unable to unlimit file descriptors, or you
+need to run many pastry nodes on a single computer, you may need to reduce
+<tt>pastry_socket_scm_max_open_sockets</tt>.  Note that this option is
+merely a soft limit which may be temporarily exceeded when sockets are 
+opened to the local pastry node from another node.</li>
+  <li><b>Fixed direct simulator --</b>
+       Added a concept of time to the simulator, and fixed the destroy() method to function properly.  ScribeRegrTest and SplitStreamRegr test now work with both "direct" and "socket".</li>
+  <li><b>Temporary fix for "large ring" bug in Past replication.</b>
+If a ring grows too quickly or two partitioned rings join replication
+can mistakenly discard data that the local node is no longer
+responsible for but no other node has yet replicated.  The temporary
+fix is to do a lookup/insert before deleting a key the local node is no longer responsible for.  Admittedly this doesn't scale, so we are working on a new solution perhaps using bloom-filters or hash trees.
+  <li><b>Proximity Neighbor Selection --</b> Fixed issue with PNS not building up routing tables during join.</li>
+The getAddress() was not being called at one place in the StandardJoinProtocol so nodes were not updating their routing tables when the JoinRequest was routed through their node.</li>
+  <li><b>Dropped JoinRequest on rapid rejoin problem --</b>
+   There was a problem with nodes not being able quickly to rejoin if they used the same NodeId.  Didn't find the cause of this bug, but can no longer reproduce.</li>
+													    
+</ul>
+<h3>Changes since release 1.4.1</h3>
+Aside from various bug fixes, this version includes rice.environment which allows for node virtualization within the same JVM.  
+FreePastry and it's p2p applilcations all use the new features.
+the Environment provides the following:
+<ul>
+  <li><b>Logging</b> &mdash We have standardize on a logging system throughout FreePastry.  This is a simpler
+  logging framework than the one that ships with java, however it is compatable.  (In other words, you can implement
+  our LogManager and Logger with the Java one.)  This logging replaces the previous "-verbose" etc. logging.</li>
+  <li><b>Parameters</b> &mdash Formerly hard-coded (<code>public static final</code>) parameters are now able to be specified at startup, or even changed during runtime
+  rather than requiring a re-compile.  It allows parameters to be changed from code, and to be persistent.
+  In other words, you could have a gui that lets you change the parameters, then store them to disk (By calling <code>Parameters.store()</code>), so next time the 
+  code is run, it retains the parameters.</li>
+  <li><b>SelectorManager</b> &mdash You can control which nodes use which SelectorManager.  The SelectorManager is a single
+  thread that handles all network IO and Timer events.  This model usually gives improved performance, and simpler 
+  synchronization than several threads.</li> 
+  <li><b>Processor</b> &mdash It is important that tasks done on the SelectorThread don't take long, as this is the network IO thread, and can cause other nodes to suspect you are faulty.  However, sometimes you need to do a CPU intensive task (like calculate a manifest for a bloom filter) that will cause problems if done on the SelectorThread.  For these tasks, you can use the "<i>Processor</i>.  This is simply a different thread that will be context switched automatically by the system.  Typically, you will access this by using the Node.process() or Endpoint.process() function call.  These calls result in a call to the <i>Processor</i>.  Future implementations could use more Threads for computers with several processors, or hyper-threading.</li> 
+  <li><b>TimeSource</b> &mdash FreePastry and its apps now call TimeSource.currentTimeMillis() rather than <code>System.currentTimeMillis()</code>.  This will (for example) allow 
+  you to run a FreePastry node on a clock that is offset from your computers clock.  This can be particularly helpful in a situation like <a href="http://www.planet-lab.org/">Planetlab</a>
+  where some nodes have incorrect system clocks due to misconfigured NTP servers.</li>
+  <li><b>RandomSource</b> &mdash Has the same interface as <a href="http://www.javadocs.org/Random">java.util.Random</a>, but Allows for easier reproducability of some errors.  You can seed the RandomSource with the same parameter so you can reproduce conditions.</li>
+</ul>  
+
+<a name="parameters"/>
+<h4>How to use parameters:</h4>
+  The Parameters interface contains:
+  <ul>
+    <li>A <b>getter</b> and <b>setter</b> for the java primitive types, as well as String, String[], InetAddress, InetSocketAddress, and InetSocketAddressAddress[].  For example <code>pubilc int getInt(String paramName)</code>.  Calling the wrong type of getter will result in a RuntimeException, such as NumberFormatException.  Calling the getter for an entry that doesn't exist will result in a RuntimeException.</li>  
+    <li><code>boolean <b>contains</b>(String paramName)</code> &mdash can check to see if a param exists before calling the getter which will result in an exceptin if it doesn't exist.</li> 
+    <li><code>void <b>remove</b>(String paramName)</code> &mdash removes a param.</li> 
+    <li><code>void <b>store</b>() throws IOException</code> &mdash stores the differences from the defaults to media (such as disk).</li> 
+  </ul>
+    Default implementation:<br/>
+
+<p>    
+  When you construct the environment (<code>new Environment()</code>) it will use rice.environment.params.simple.SimpleParameters to manage parameters.  The Environment constructor with no parameters will look for a file called <b>freepastry.params</b> in the classpath.  This file is the default file, and is immutable, thus calling the store() method on the Parameters object will do nothing.  The format for freepastry.params is explained <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Properties.html">here</a>.<br/>
+  If you want to specify a file to save dynamic user parameters, or to override the default freepastry parameters, you can specify a single String fileName in the Environment constructor.<br/>  
+  To override the default params filename, or to use a chain of defaults (for example epost uses a secondary default file to override and add to freepastry's defaults), specify a String[] of the defaults in order (for example freepastry, then epost), then specify a String for the dynamic user settings.
+</p>
+
+<h4>How to use logging:</h4>
+<p>
+  You can access the environment from the rice.p2p.commonapi.Node interface.  A programatic call to the Logger would typically look like:
+<pre>
+  Node n;
+  n.getEnvironment().getLogManager().getLogger(MyClass.class, instance).log(Logger.WARNING, "This is a warning");
+  n.getEnvironment().getLogManager().getLogger(MyClass.class, instance).logException(Logger.WARNING, "This is an exception", new Exception());
+</pre>  
+
+Of course you can use helper methods to reduce typing.</p>
+
+<p>The available log levels can be found in the rice.environment.logging.Logger interface, but the match <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/logging/Level.html">java's log Levels</a>.</p>
+
+  <p>By default the logging will go to <code>System.out</code> (standard output).  To make the logging go elsewhere, construct the environment with a SimpleLogManager that is constructed with a PrintStream that you want (such as <code>System.err</code>, or a File).</p>
+
+  The following parameters affect logging:
+<ul>
+  <li><b>loglevel</b> &mdash specifies the default log level.  Can be an integer level, or any of the defined names.
+ (defaults to WARNING in freepastry.params)</li>
+  
+  <li><b>(package.or.full.class.name)[:instance]_loglevel</b> &mdash; specifies log levels on specific packages or classes.
+  So, for example, to turn on ALL logging for the scribe package add a parameter to the params file such as:
+  <blockquote>
+  <tt>rice.p2p.scribe_loglevel = ALL</tt>
+  </blockquote>
+  
+  to do this for a particular scribe instance do:
+  <blockquote>
+  <tt>rice.p2p.scribe:myinstance_loglevel = ALL</tt>
+  </blockquote>
+  
+  and for a specific class:
+  <blockquote>
+  <tt>rice.pastry.socket.SocketChannelWriter_loglevel = ALL</tt>
+  </blockquote></li>
+      
+  <li><b>pastry_factory_multipleNodes</b> &mdash if true, prepends each logged line with the nodeId.  This is useful when you have multiple nodes in the same JVM, but want to be able to distinguish which nodes is logging what.</li>
+</ul>
+
+  Logging to file (used when you have multiple nodes in the same JVM, and want logging to go to separate files, with a name that is based on the node's id):
+<ul>
+  <li><b>environment_logToFile</b> &mdash if true, used in conjunction with <b>pastry_factory_multipleNodes</b>, logs each node to its own file, logging not related to a node goes to Stdout by default (usually stdout).</li>
+  <li><b>fileLogManager_filePrefix</b> &mdash allows you to specify the prefix of these files</li>
+  <li><b>fileLogManager_fileSuffix</b> &mdash allows you to specify the suffix of these files, default is ".log"</li>
+
+</ul>
+
+<h4>Other notes on the Environment:</h4>
+<ul>
+<li>The main constructor takes in all 6 services that the environment provides.  Any fields that are null will be given an appropriate default value.  However, the Parameters field must be non-null to use this constructor.</li>
+<li>The default implementation of each service, except for the SelectorManager, can be found in subpackages of rice.environment.  They are named "simple" for each type of service.  (For example rice.environment.params.simple.SimpleParameters implements rice.enviornment.params.Parameters.)</li>
+</ul>
+
+<h4>Other changes:</h4>
+<ul>
+<li>Created non-blocking, continuation based versions of getNodeHandle(), getLeafSet() etc. in the factories.</li>
+</ul>
+
+<h3>Changes since release 1.4</h3>
+<p/>Version 1.4.1 introduces the ConsistentJoinProtocol and some changes to the PeriodicLeafSetProtocol.  These improvements provide stronger guarantees regarding routing consistency.  
+<h4>What is consistency?</h4>
+  Routing is <i>consistent</i> if no overlay node ever delivers a lookup message when it is not the current root node for the message's destination key. -- Microsoft Technical Report MSR-TR-2003-94
+
+<h4>Wasn't FreePastry always consistent?  What could have caused routing inconsistencies in previous versions?</h4>
+  Routing could be inconsistent in FreePastry if at some point there existed two adjacent nodes that are both active and do not know of each other, thus believing that they are responsible for some of the same keyspace.  This could temporarily happen during concurrent joins, or if a node incorrectly determined its direct neighbor to be faulty, and therefore took over that section of the keyspace.  The result of an inconsistency is that routing to a key (for example a DHT put/get) could cause the message to be delivered to different nodes, depending on the origin of the message.  Thus you may do a PUT but then a subsequent GET still retrieves the old value!
+<h4>How does FreePastry prevent routing inconsistency?</h4>
+<p/>Our consistent join protocol is similar to that described in <a href="http://www.cs.rice.edu/~jeffh/wiki/msr-tr-2003-94.pdf">Microsoft Technical Report MSR-TR-2003-94</a>, except that it does not require that all nodes are reachable from any other node at all times.  The idea is that when a node joins, before it accepts messages, it must first contact its entire leafset and either receive a reply from each member or determine them faulty.  This causes concurrent joiners to be aware of each other before both can become active.  We rely on dynamic source routing introduced in FreePastry Version 1.4 to ensure that a node is considered alive as long as it is reachable by one of its leafset members.  
+<p/>The new protocol also dramatically reduces the overhead of leafset maintenance.  By default the system is configured to send and receive a message from each neighbor every 20 seconds, and if it takes more than 30 seconds to hear from a neighbor, then a checkLiveness() starts.  This ensures that a portion of ringspace never remains unclaimed for longer than 50 seconds (20 seconds between pings, then 30 seconds to wait for replies) after the death of a node.
+
+<p/>We ran tests on PlanetLab to characterize the overhead of leafset maintence at various neighbor ping intervals. 
+All of the data for the following graphs were collected on a ring running with no application and induced churn to give an average node lifetime of 60 minutes.  
+<div align="center"><img src="cjp_percent_graph.png" width="640" height="480"><br>
+This graph represents the fraction of traffic that is due to leafset maintenance.  One hundred percent would mean that all overlay traffic was due to leafset maintence.  Leafset maintenance amounts to a modest 12.4% of traffic in packets even at a fairly aggressive neighbor ping rate of once every 20 seconds (the default).  We expect the overhead as measured in bytes to go down in a future release of FreePastry that uses a binary wire protocol rather than java serialization.
+</div>
+<div align="center"><img src="cjp_bytes_graph.png" width="640" height="480"><br>
+This graph shows the average traffic due to leafset maintenance in bytes per second (smaller numbers are better).  The error bars are at one standard deviation among the nodes in the overlay.  At a 20 second neighbor ping interval leafset maintenance traffic is 71.5% of overlay traffic (top graph) but as this graph shows, that amounts to a data rate of only 500 bytes/second.
+</div>
+<div align="center"><img src="cjp_packets_graph.png" width="640" height="480"><br>
+This graph shows the average traffic due to leafset maintenance in packets per second (smaller numbers are better).  The error bars are at one standard deviation among the nodes in the overlay.  At a 20 second neighbor ping interval, leafset maintence requires about 0.15 packets per second, or about 10 packets per minute.
+</div>
+<p/>Applications can trade off between the amount of maintence overhead they are willing to tolerate and the length of time they are willing to allow ringspace to be unclaimed by adjusting the neighbor ping interval.
+
+<h4>New behavior:</h4>
+<ul>
+  <li>When using the <code>rice.pastry.standard.ConsistentJoinProtocol</code> (which is now the default for the <code>SocketPastryNodeFactory</code>) <code>PastryNode.setReady()</code> will not be called until the node receives a <code>ConsistentJoinMsg</code> message from every node in its leafset.<br/><br/></li>
+  <li>Messages will not be delivered to a PastryAppl until the PastryNode.isReady() returns true.  The same behavior occurs for applications built on the commonAPI because PastryEndpoint extends PastryAppl.  This change occurred in the rice.pastry.messaging.MessageDispatch<br/><br/></li>
+  <li><b>Important: </b> If the Pastry selector takes more than 20 seconds (the time it takes rice.pastry.socket to find a node faulty) to select, then it is possible that other nodes will have found the node faulty.<br/><br/>  
+
+This can occur for 2 reasons:
+<ul>
+ <li>A system standby or other type of process pause occurs.</li>
+ <li>Application level code is taking too long to process messages.</li>  
+</ul>
+<br/>
+To prevent inconsistet routing in this case, the <code>ConsistentJoinProtocol</code> will call <code>PastryNode.setReady(false)</code>.  This will cause your applications to stop receiving messages until the <code>ConsistentJoinProtocol</code> "rejoins" and calls <code>PastryNode.setReady(true)</code> again.  By default, your application will not receive any notification of these events!  If you wish to hear about such events then register yourself with the PastryNode as an Observer.  You will receive a <code>Boolean(true)</code> when the node becomes ready, and a <code>Boolean(false)</code> when not-ready.  Note that to keep reverse compatibility with your applications, <code>PastryAppl.notifyReady()</code> will still be called <i>only</i> the first time a node becomes active.<br/><br/></li>
+
+  <li>In the current version of FreePastry, complete network partitions may lead to routing inconsistency.  If a small group of machines loses connectivity to the rest of the overlay, they may detect all other nodes to be faulty and begin accepting messages for larger and larger portions of the key space.  The FreePastry team is currently investigating a approaches to deal with such partitions, and we expect a solution in a forthcoming release.<br/><br/>
+</ul>  
+<h4>Testing:</h4>  
+We have done extensive routing consistency testing on <a href="http://www.planet-lab.org/">Planetlab</a>.  The only times we find routing inconsistencies is during a network partition (usually the loss of a subnet).  Routing in this case is only inconsistent across the partitions.
+  
+<h3>Changes since release 1.3.2</h3>
+<ul>
+  <li>Supports <a href="http://www.epostmail.org/">ePOST</a>, which is now in production use.[<a href="http://www.epostmail.org/code.html">Download</a>]</li><br/>
+
+  <li>Single threaded:&nbsp;
+  We have adapted a single threaded model to improve performance. Calls into Pastry are still properly synchronized.  In fact if you run multiple nodes within the same JVM they will execute on the same thread.  The scheduler is implemented in rice.selector.</li><br>
+
+<li>Transport Layer/Routing:</li><br>
+<ul>
+  <li>Removed rice.pastry.RMI, rice.pastry.Wire -- Use rice.pastry.Socket</li><br>
+
+  <li>Simplified transport layer.  The Socket transport layer uses TCP for <i>all</i> messaging except liveness.</li><br>
+
+  <li>Improved liveness checking, better support for churn.  The Socket transport layer uses UDP only for liveness checks, and they are sent using random exponential backoff.</li><br>
+  
+  <li>Improved support for PlanetLab and the Internet.  Gracefully handles temporary and permanent routing anomalies by using sourceroutes.  The sourceroutes are selected from nodes within the leafset.</li><br>
+
+  <li>Improved routing performance.  Aggressive routing around nodes that may have stalled.  We now use per hop acks to rapidly route around stalled or congested nodes.</li><br>
+
+  <li>Support for a fixed file descriptor limit on sockets.  This is used for nodes that need to fix the maximum number of concurrently opened sockets.  Typically this is used if you don't have sufficient privilege to raise the maximum number of open file descriptors for a process. (See ulimit -n).</li><br>
+
+  <li>Support for fine grained prioritization of message delivery.  We added <code>int getPriority()</code> to the message interface.  The transport will prioritize higher priority messages over low priority.</li><br>
+
+  <li>Support for multiple bootstrap nodes.  The socket transport layer can take a list of IP addresses to try to boot off of.  It will attempt to connect to them in random order and return the first one it is able to connect to.  (See <code>DistPastryNodeFactory.getNodeHandle(InetSocketAddress[])</code>)</li><br/>
+
+  <li>Support for NodeId reuse.  Previous versions randomized the last 32 bits of a NodeId.  The new version uses an epoch to determine if a node has rebooted since you last talked to it.</li><br/>
+</ul>
+<li>Modules:</li><br>
+<ul>
+  <li>p2p.commonapi -- Added priority to messages.</li><br/>
+  <li>p2p.past -- Added lease-based past version in p2p.past.gc - extends the PAST interface.</li><br/>
+  <li>p2p.scribe -- Minor changes.</li><br/>
+  <li>p2p.replication -- This has been modified to use bloom filters instead of key lists for replication.</li><br/>
+  <li>p2p.splitstream -- Minor scalability improvements based on planetlab deployment.</li><br>
+  <li>(NEW) p2p.util -- Various utilities for p2p packages, including Cryptography and XML.</li><br>
+  <li>(NEW) p2p.multiring -- An implementation of the IPTPS paper, complete with optional RingCertificates.</li><br>
+  <li>(NEW) p2p.aggregation -- Improves DHT efficiency by aggregating small objects</li><br>
+<ul>
+<li>Aggregation:  This module can increase the efficiency of a DHT by bundling several small
+  objects into a larger aggregate. It is used by Glacier, but can also be
+  combined with other DHTs such as PAST. </li><br>
+</ul>
+  <li>(NEW) p2p.glacier -- Protects against data loss during large-scale correlated failures</li><br>
+<ul>
+<li>Glacier:  Distributed storage systems can suffer data loss when a large fraction
+  of the storage nodes fail simultaneously, e.g. during a worm attack.
+  Glacier protects against this by spreading redundant data fragments
+  throughout the system. It can reconstruct the data with high probability
+  even after disastrous failures that may affect 60% of the nodes or more.
+  Please see <a href="http://www.cs.rice.edu/~ahae/abstracts/glacier.html">our NSDI paper on Glacier</a> for a more detailed description.</li><br>
+</ul>
+  
+  <li>persistence -- Many improvements and bug fixes.  Basically the same interface.  Should be now *MUCH* more robust.  Also added metadata support to the rice.persistence package classes.</li><br>
+  <li>(NEW) selector -- Allows pastry to run on a single thread.</li><br>
+</ul>
+</ul>
+
+
+<h3>Changes since release 1.3.1</h3>
+<ul>
+  <li>Overhaul of the wire package. The new version is higher
+ performance and has eliminated some known synchronization issues that
+ can cause deadlock. Furthermore the package produces the more sensible
+ NodeIsDeadException if a message is attempted to be sent after the node
+ has simulated being killed.  Killing of nodes remains for testing, and is not supported on all platforms.</li>
+</ul>
+<ul>
+  <li>Corrections to past.</li>
+</ul>
+<ul>
+  <li>New version of Replication Manager in rice.p2p.replication.
+Based on commonapi instead of pastry. There is an alternate/simpler
+interface to rm in the rice.p2p.replication.manager package.</li>
+</ul>
+<ul>
+  <li>Past has been migrated to the new rm (p2p.replication).</li>
+</ul>
+<ul>
+  <li>Some bug fixes.</li>
+</ul><br>
+<h3>Changes since release 1.3</h3>
+<ul>
+  <li>New version of Scribe implemented on the common API. New
+version
+is re-designed to increase the performance, reliability and ease of
+use. The previous version of Scribe is still include in the release. </li>
+</ul>
+<ul>
+  <li>New version of PAST provides a method to obtain handles to all
+replicas, and various bug fixes. The old version of PAST that was built
+on top of the Pastry API is now deprecated.  The version built upon the
+commonApi should now be used.
+  </li>
+</ul>
+<ul>
+  <li>The discovery protocol for automatic location of nearby node given
+any bootstrap node is now implemented. This is described in the <a href="http://freepastry.rice.edu/PAST/location.pdf"> Pastry
+proximity paper</a>.
+ </li>
+</ul>
+<ul>
+ <li>A prototype implementation of SplitStream, a high bandwidth
+multicast system,is now released. This implementation does not yet
+implement all of the optimizations described in the paper; therefore,
+overheads maybe higher than those reported in the paper. See <a href="#SplitStream">below</a>
+for more details about using SplitStream.
+ </li>
+</ul>
+<ul>
+  <li>Some bug fixes.</li>
+</ul><br>
+<h3>Changes since release 1.2</h3>
+<ul>
+  <li>FreePastry now supports the common API, as described in the
+IPTPS'03 paper listed above. Newly developed applications should
+use this API, and only import the p2p.commonapi package. The previous,
+native FreePastry API continues to be supported for backward
+compatibility. <br>
+  </li>
+</ul>
+<ul>
+  <li>A more general implementation of the <a href="http://www.cs.rice.edu/CS/Systems/PAST/default.htm">PAST</a>
+archival storage system was added in this release. The release adds
+support for replication and caching of data.&nbsp;  The implementation
+provides a generic distributed hash table (DHT) facility, and allows
+control over the semantics of tuple insertion for a given,
+application-specific value type. The previous version of PAST has been
+marked as deprecated and may not be included in future releases.
+Applications that use Past should migrate to the new version. </li>
+</ul>
+<ul>
+  <li>A version of the replication manager, which provides
+application-independent management   of replicas, is included.
+Application that need to replicate data on the set of <i>n</i> nodes
+closest to a given key can use the replication manager in order to
+perform this task. </li>
+</ul>
+<ul>
+  <li>Some bug fixes.</li>
+</ul>
+<br>
+<h3>Changes since release 1.1</h3>
+<ul>
+  <li>A simple implementation of the <a href="http://www.cs.rice.edu/CS/Systems/PAST/default.htm">PAST</a>
+archival storage system was added in this release. The implementation
+does not currently perform the storage balancing algorithms described in
+the SOSP paper, nor does it perform data replication or caching. Support
+for replication and caching will be included in the next release.</li>
+</ul>
+<ul>
+  <li>An anycast primitive was added to the implementation of <a href="http://www.research.microsoft.com/%7Eantr/SCRIBE/"> Scribe</a>, a
+group communication infrastructure. Also, several methods and new
+interfaces and a new interface were added to provide apps more control
+over the construction and maintenance of Scribe trees.</li>
+</ul>
+<ul>
+  <li>Some bug fixes.</li>
+</ul>
+<ul>
+  <li>Some initial performance work was done. As a result, large
+simulations run about 50% faster, and use a lot less memory.<br>
+  </li>
+</ul>
+<br>
+<br>
+<h3> Notes</h3>
+Release 1.4 has the following limitations. <br>
+&nbsp;
+<ul>
+  <li>More performance tuning needs to be done.</li>
+&nbsp; <li>Two "transport protocols" are provided with this release,
+"Socket", and "Direct".</li>
+</ul>
+<ul>
+  <ul>
+    <li> "Direct" emulates a network, allowing many Pastry nodes to
+execute in one Java VM without a real network. This is very useful for
+application development and testing.</li>
+  </ul>
+</ul>
+<ul>
+  <ul>
+    <li>"Socket" uses an event-based implementation based on sockets, and
+uses the non-blocking NIO support in Java 1.4.2.  It uses TCP for all
+communication except liveness checks which are UDP.  This version is much 
+more robust than prior distributions and has been tested extensively on 
+planetlab.</li>
+  </ul>
+</ul>
+  <ul>
+<blockquote>
+On Unix systems, Java's socket implementation uses File
+Descriptors.  In this implementation, the File Descriptors can be used
+up if too many nodes are running in a single process.  We have a soft
+limit on the number of file descriptors, but we are aware that you can 
+exceed this number under some scenarios.  For example if you send messages 
+to to more nodes than you have file descriptors without giving up the 
+thread to allow io.  If you require running more than one node inside a 
+single process, consider increasing the number of File Descriptors per 
+process (bash: ulimit -n), or lowering the available sockets per node
+(rice.pastry.socket.SocketCollectionManager.MAX_OPEN_SOCKETS).
+
+The number of allowed sockets is set set by the parameter 
+<b>pastry_socket_scm_max_open_sockets</b>.  See <a href="#parameters">
+parameters</a> for information on how to override the default paramteters.
+</li>
+  </ul>
+</blockquote>
+<ul>
+  <li> Security support does not exist in this release. Therefore,
+the software should only be run in trusted environments. Future
+releases will include security.</li>
+</ul>
+<blockquote>(Background: To start a Pastry node, the IP address (and
+port number, unless the default port is used) of a "bootstrap" or
+"contact" node  must be provided. If no such node is provided, and no
+other Pastry node runs  on the local machine, then FreePastry creates a
+new overlay network  with itself as the only node. Any node that is
+already part of the Pastry  node can serve as the bootstrap node.)</blockquote>
+<ul>
+  <li>The Scribe implementation included in this release does not yet
+support the tree optimization techniques describe in Sections IV, E-F of
+the <a href="http://www.cs.rice.edu/%7Edruschel/publications/Scribe-jsac.pdf">
+Scribe paper</a>.<br>
+  </li>
+</ul>
+<p> &nbsp; <br>
+&nbsp; <br>
+&nbsp; </p>
+<h3> Installation</h3>
+To use the binary distribution, download the pastry jar file and set
+the Java classpath to include the path of the jar file. This can be done
+using the "-cp" command line argument, or by setting the CLASSPATH
+variable in  your shell environment.  For some applications you may need the 
+3rd party libraries included with the distribution.  These are available
+in the source distributions.  Simply unpack the distribution and include the 
+jars in the lib/ directory in your classpath.
+<p>To compile the source distribution we have switched to ant for the build 
+process.  You will need to have ANT installed (available from 
+<a href="http://ant.apache.org/">http://ant.apache.org/</a>) on your
+system.  Expand the archive (FreePastry-1.4.2-source.tgz or FreePastry-1.4.2-source.zip)
+into a directory. Execute "ant" in the top level
+directory (you may have to increase the maximum memory for ant by setting the
+environment variable ANT_OPTS=-Xmx128m), then change
+to the "classes" directory to run FreePastry.&nbsp; </p>
+<p>You may have to provide a Java security policy file with sufficient
+permissions to allow FreePastry to contact other nodes. The simplest way
+to do this is to install a ".java.policy" file with the following
+content into your home directory: </p>
+<p>grant { <br>
+&nbsp;&nbsp;&nbsp; permission java.security.AllPermission; <br>
+}; </p>
+<hr>
+<h3> Running FreePastry</h3>
+1. To run a HelloWorld example:
+<pre><b>
+     java [-cp pastry.jar] rice.pastry.testing.DistHelloWorld
+          [-msgs m] [-nodes n] [-port p] [-bootstrap bshost[:bsport]] [-protocol [socket]]
+          [-verbose|-silent|-verbosity v] [-help]
+
+        Without -bootstrap bshost[:bsport], only localhost:p is used for bootstrap.
+        Default verbosity is 8, -verbose is 1, and -silent is 10 (error msgs only).
+
+        (replace "pastry.jar" by "FreePastry-&lt;version&gt;.jar", of course)
+</b></pre>
+<br>
+&nbsp;&nbsp;&nbsp; Some interesting configurations:
+<pre><b>
+  a. java rice.pastry.testing.DistHelloWorld
+
+        Starts a standalone Pastry network, and sends two messages
+        essentially to itself. Waits for anyone to connect to it,
+        so terminate with ^C.
+
+  b. java rice.pastry.testing.DistHelloWorld -nodes 2
+
+        One node starts a Pastry network, and sends two messages to
+        random destination addresses. At some point another node
+        joins in, synchronizes their leaf sets and route sets, and
+        sends two messages to random destinations. These may be
+        delivered to either node with equal probability. Note how
+        the sender node gets an "enroute" upcall from Pastry before
+        forwarding the message.
+
+  c. java rice.pastry.testing.DistHelloWorld -nodes 2 -verbose
+
+        Also prints some interesting transport-level messages.
+
+  d. pokey$ java rice.pastry.testing.DistHelloWorld
+     gamma$ java rice.pastry.testing.DistHelloWorld -bootstrap pokey
+
+        Two machines coordinate to form a Pastry network.
+
+  e. pokey$ java rice.pastry.testing.DistHelloWorld
+     gamma$ java rice.pastry.testing.DistHelloWorld -bootstrap pokey
+
+        wait a few seconds, and interrupt with &lt;ctrl-C&gt;
+
+     gamma$ java rice.pastry.testing.DistHelloWorld -bootstrap pokey
+
+        The second client restarts with a new NodeID, and joins the
+        Pastry network. One of them sends messages to the now-dead
+        node, finds it down, and <em>may or may not</em> remove it<br>        from the leaf sets. (repeat a few times to observe both<br>        possibilities, i.e., leaf sets of size 3 or 5). If the<br>        latter, then leaf set maintenance kicks in within a minute<br>        on one of the nodes, and removes the stale entries.<br>        <br>  f. pokey$ java rice.pastry.testing.DistHelloWorld<br>     gamma$ java rice.pastry.testing.DistHelloWorld -bootstrap pokey -nodes 2<br>     <br>        The client on gamma instantiates two virtual nodes, which<br>        are independent in identity and functionality. Note how the <br>        second virtual node bootstraps from the first (rather than <br>        from pokey). Try starting say 10 or 30 virtual nodes, killing <br>        with a &lt;ctrl-C&gt;, starting another bunch, etc.<br></b></pre>
+<br>
+2. To run the same HelloWorld application on an emulated network:
+<pre><b>
+     java [-cp pastry.jar] rice.pastry.testing.HelloWorld [-msgs m] [-nodes n] [-verbose|-silent|-verbosity v] [-simultaneous_joins] [-simultaneous_msgs] [-help]
+</b></pre>
+<br>
+&nbsp;&nbsp;&nbsp; Some interesting configurations:
+<pre><b>
+  a. java rice.pastry.testing.HelloWorld
+
+        Creates three nodes, and sends total three messages from
+        randomly chosen nodes to random destinations addresses
+        (which are delivered to the node with the numerically
+        closest address).
+
+  b. java rice.pastry.testing.HelloWorld -simultaneous_joins -simultaneous_msgs
+
+        Join all three nodes at once, then issue three messages,
+        then go about delivering them.
+</b></pre>
+<br>
+3. To run a regression test that constructs 500 nodes connected by an
+emulated network:
+<pre><b>
+     java [-cp pastry.jar] rice.pastry.testing.DirectPastryRegrTest
+</b></pre>
+<br>
+4. To run a simple performance test based on an emulated network with
+successively larger numbers of nodes:
+<pre><b>
+     java [-cp pastry.jar] rice.pastry.testing.DirectPastryPingTest
+</b></pre>
+<p> </p>
+<h3> Writing applications on top of FreePastry</h3>
+Applications that wish to use the native Pastry API must extend the
+class rice.pastry.client.PastryAppl. This class implements the Pastry
+API. Each application  consists minimally of an application class that
+extends rice.pastry.client.PastryAppl, and a driver class that
+implements main(), creates and initializes one of  more nodes, etc.
+Example applications and drivers can be found in rice.pastry.testing;
+the Hello World suite (HelloWorldApp.java,  HelloWorld.java,
+DistHelloWorld.java) may be a good starting point.<br>
+<br>
+Another sample Pastry application is rice.scribe.<br>
+<br>
+Application writers are strongly encouraged to base newly written
+applications on the new common API. Such applications should import the
+package rice.p2p.commonapi.<br>
+<br>
+<hr>
+<h3> Running Scribe</h3>
+1. To run a simple distributed test:
+<pre><b>
+     java [-cp pastry.jar] rice.p2p.scribe.testing.ScribeRegrTest [-nodes n] [-port p] [-bootstrap bshost[:bsport]] [-protocol (direct|socket)] [-help]
+
+        Ports p and bsport refer to contact port numbers (default = 5009).
+        Without -bootstrap bshost[:bsport], only localhost:p is used for bootstrap.
+        (replace "pastry.jar" by "FreePastry-&lt;version&gt;.jar", of course)
+</b></pre>
+<br>
+<hr>
+<h3> Running PAST</h3>
+1. To run a simple distributed test requires placing the xmlpull.jar in the classpath: <br/>
+<pre><b>
+     java -cp [.|pastry.jar];xmlpull&lt;version&gt;.jar;xpp&lt;version&gt;.jar rice.p2p.past.testing.PastRegrTest [-nodes n] [-protocol (direct|socket)]<br>
+</b></pre>
+In some unix shells, you may need to specify the classpath inside double quotes.  <br/>
+This creates a network of <tt>n</tt> nodes (10 by default), and then
+runs the Past regression test over these nodes.
+<br>
+<hr>
+<a name="SplitStream"><h3> Running SplitStream</h3></a>
+The FreePastry implementation of SplitStream implements the system
+described in the <a href="http://freepastry.rice.edu/SplitStream/default.htm">SOSP '03 paper</a>.
+<p>
+SplitStream.java class provides an interface that can be used by
+applications to create SplitStream instances. Each SplitStream forest
+is represented by a channel object (Channel.java), where a channel
+object encapsulates multiple stripe trees. Each stripe tree for a
+SplitStream forest is represented by a class (Stripe.java), which
+handles the data reception and subscription failures.
+</p><p>
+Applications can configure the maximum capacity each channel can
+accommodate in terms of number of children it is willing to accept. Applications can control total
+outgoing capacity they are willing to provide by changing the value in ScribeSplitStreamPolicy.java.
+</p><p>
+
+1. To run a simple distributed test: <br>
+</p><pre><b>
+     java [-cp pastry.jar] rice.p2p.splitstream.testing.SplitStreamRegrTest [-nodes n] [-protocol (direct|socket)]<br>
+</b></pre>
+This creates a network of <tt>n</tt> nodes (10 by default), and then
+runs the SplitStream regression test over these nodes.
+</body></html>
