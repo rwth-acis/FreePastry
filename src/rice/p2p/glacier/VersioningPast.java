@@ -45,7 +45,7 @@ import rice.p2p.commonapi.*;
  * This interface is exported by a PAST instance that offers access to
  * specific versions of an object. 
  *
- * @version $Id: VersioningPast.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * @author Andreas Haeberlen
  */
 

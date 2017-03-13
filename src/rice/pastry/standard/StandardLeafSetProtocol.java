@@ -48,7 +48,7 @@ import java.util.*;
 /**
  * An implementation of a simple leaf set protocol.
  * 
- * @version $Id: StandardLeafSetProtocol.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * 
  * @author Peter Druschel
  * @author Andrew Ladd

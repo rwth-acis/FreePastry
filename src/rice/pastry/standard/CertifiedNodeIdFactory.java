@@ -58,7 +58,7 @@ import rice.p2p.util.*;
  * have the same nodeId.  NOTE:  Actual certification is not yet implemented, rather, 
  * using this factory simply guarantees that the node's nodeId will never change.
  *
- * @version $Id: CertifiedNodeIdFactory.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

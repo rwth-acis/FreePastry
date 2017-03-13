@@ -45,7 +45,7 @@ import java.io.*;
  * This interface is an abstraction of a message which is sent through
  * the common API-based system.
  *
- * @version $Id: Message.java 3647 2007-03-13 13:50:26Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  * @author Peter Druschel

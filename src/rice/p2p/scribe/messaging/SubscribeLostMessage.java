@@ -53,7 +53,7 @@ import rice.p2p.scribe.rawserialization.ScribeContentDeserializer;
  *
  * The ack for a subscribe message.
  *
- * @version $Id: SubscribeLostMessage.java 3653 2007-03-27 18:39:52Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

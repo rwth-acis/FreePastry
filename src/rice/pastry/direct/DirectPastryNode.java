@@ -63,7 +63,7 @@ import rice.selector.Timer;
 /**
  * Direct pastry node. Subclasses PastryNode, and does about nothing else.
  * 
- * @version $Id: DirectPastryNode.java 4221 2008-05-19 16:41:19Z jeffh $
+ * @version $Id$
  * 
  * @author Sitaram Iyer
  */

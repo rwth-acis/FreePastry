@@ -49,7 +49,7 @@ import rice.p2p.scribe.*;
  *
  * This class the abstraction of a message used internally by Scribe.
  *
- * @version $Id: ScribeMessage.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

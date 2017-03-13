@@ -40,7 +40,7 @@ package rice.p2p.splitstream;
 /**
  * This interface allows an application running on top of SplitStream to be notified of events.
  *
- * @version $Id: SplitStreamClient.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * @author Ansley Post
  * @author Alan Mislove
  */

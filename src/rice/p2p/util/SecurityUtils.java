@@ -52,7 +52,7 @@ import javax.crypto.spec.*;
  * This class contains a large number of static methods for performing
  * security-related primitives, such as encrypt, decrypt, etc...
  *
- * @version $Id: SecurityUtils.java 4167 2008-03-28 15:26:37Z jstewart $
+ * @version $Id$
  * @author amislove
  */
 public class SecurityUtils {

@@ -46,7 +46,7 @@ import java.util.*;
 /**
  * NodeIdUnit tests the NodeId class.
  * 
- * @version $Id: NodeIdUnit.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * 
  * @author Andrew Ladd
  */

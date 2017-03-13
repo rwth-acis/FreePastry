@@ -45,7 +45,7 @@ import rice.p2p.commonapi.*;
  *
  * This class wraps a Node
  *
- * @version $Id: GCNode.java 3992 2007-12-02 20:09:18Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

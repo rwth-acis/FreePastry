@@ -47,7 +47,7 @@ import java.security.*;
  * Constructs NodeIds for virtual nodes derived from the IP address and port
  * number of this Java VM.
  * 
- * @version $Id: IPNodeIdFactory.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * 
  * @author Peter Druschel
  */

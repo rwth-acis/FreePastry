@@ -51,7 +51,7 @@ import rice.p2p.splitstream.*;
  * @(#) SplitStreamRegrTest.java Provides regression testing for the Scribe
  *      service using distributed nodes.
  * 
- * @version $Id: SplitStreamRegrTest.java 3992 2007-12-02 20:09:18Z jeffh $
+ * @version $Id$
  * @author Ansley Post
  */
 

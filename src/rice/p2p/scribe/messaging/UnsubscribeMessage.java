@@ -52,7 +52,7 @@ import rice.p2p.scribe.rawserialization.ScribeContentDeserializer;
  *
  * The unsubscribe message.
  *
- * @version $Id: UnsubscribeMessage.java 3670 2007-04-07 00:53:57Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

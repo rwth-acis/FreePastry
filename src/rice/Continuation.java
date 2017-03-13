@@ -50,7 +50,7 @@ import rice.selector.SelectorManager;
  * call becomes available, the receiveResult method on this command
  * is called.
  *
- * @version $Id: Continuation.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  * @author Andreas Haeberlen

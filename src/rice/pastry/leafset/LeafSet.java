@@ -49,7 +49,7 @@ import java.io.*;
  *
  * The leafset is not strictly a set: when the ring is small, a node may appear in both the cw and the ccw half of the "set".
  *
- * @version $Id: LeafSet.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Andrew Ladd
  * @author Peter Druschel

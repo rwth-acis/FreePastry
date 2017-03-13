@@ -43,7 +43,7 @@ package rice.p2p.commonapi;
  * Interface which an application must implement in order to run on top of
  * the Node interface.  
  *
- * @version $Id: Application.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * @author Alan Mislove
  * @author Peter Druschel

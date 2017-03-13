@@ -53,7 +53,7 @@ import java.lang.*;
  * 
  * A performance test suite for pastry.
  * 
- * @version $Id: DirectPastryPingTest.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * 
  * @author Rongmei Zhang
  */

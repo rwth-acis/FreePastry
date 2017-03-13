@@ -53,7 +53,7 @@ import java.util.Map;
  * A route message contains a pastry message that has been wrapped to be sent to
  * another pastry node.
  * 
- * @version $Id: RouteMessage.java 4279 2008-07-15 11:13:33Z jeffh $
+ * @version $Id$
  * 
  * @author Andrew Ladd
  */

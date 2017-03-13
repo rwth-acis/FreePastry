@@ -41,7 +41,7 @@ import java.io.*;
 /**
  * This is the options for a client to send messages.
  * 
- * @version $Id: SendOptions.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * 
  * @author Andrew Ladd
  */

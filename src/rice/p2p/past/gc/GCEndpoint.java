@@ -56,7 +56,7 @@ import rice.p2p.commonapi.rawserialization.*;
  * This class wraps an endpoint and allows for applications to transparently
  * use GC functionality.
  *
- * @version $Id: GCEndpoint.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

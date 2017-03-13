@@ -50,7 +50,7 @@ import rice.p2p.past.*;
  *
  * This class represents a request for all of the replicas of a given object.
  *
- * @version $Id: LookupHandlesMessage.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * result should be MultiringNodeHandleSet
  *

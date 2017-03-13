@@ -326,11 +326,15 @@ public class PriorityTransportLayerImpl<Identifier> implements PriorityTransport
     synchronized(entityManagers) {
       EntityManager ret = entityManagers.get(i); 
       if (ret == null) {
-        ret = new EntityManager(i);
+        ret = generateEntityManager(i);
         entityManagers.put(i, ret);
       }
       return ret;
     }
+  }
+  
+  protected EntityManager generateEntityManager(Identifier i) {
+    return new EntityManager(i);
   }
   
   protected EntityManager deleteEntityManager(Identifier i) {
@@ -464,7 +468,7 @@ public class PriorityTransportLayerImpl<Identifier> implements PriorityTransport
    * 
    * @author Jeff Hoye
    */
-  class EntityManager implements P2PSocketReceiver<Identifier> {
+  public class EntityManager implements P2PSocketReceiver<Identifier> {
     // TODO: think about the behavior of this when it wraps around...
     int seq = Integer.MIN_VALUE;
     SortedLinkedList<MessageWrapper> queue; // messages we want to send
@@ -479,7 +483,7 @@ public class PriorityTransportLayerImpl<Identifier> implements PriorityTransport
     // Invariant: if (messageThatIsBeingWritten != null) then (writingSocket != null)
     private boolean registered = false;  // true if registed for writing
     
-    EntityManager(Identifier identifier) {
+    public EntityManager(Identifier identifier) {
       this.identifier = new WeakReference<Identifier>(identifier);
       queue = new SortedLinkedList<MessageWrapper>();
       sockets = new HashSet<P2PSocket<Identifier>>();
@@ -699,7 +703,7 @@ public class PriorityTransportLayerImpl<Identifier> implements PriorityTransport
           public void receiveException(SocketRequestHandle<Identifier> s, Exception ex) {
             if (handle.getSubCancellable() != null && s != handle.getSubCancellable()) throw new IllegalArgumentException(
                 "s != handle.getSubCancellable() must be a bug. s:"+
-                s+" sub:"+handle.getSubCancellable());
+                s+" sub:"+handle.getSubCancellable(),ex);
             getEntityManager(s.getIdentifier()).receiveSocketException(handle, ex);
           }
         }, options));
@@ -860,7 +864,11 @@ public class PriorityTransportLayerImpl<Identifier> implements PriorityTransport
 //      }
       synchronized(EntityManager.this) {
         if (handle == pendingSocket) {        
-          if (logger.level <= logger.INFO) logger.log(EntityManager.this+".receiveSocketException("+ex+") setting pendingSocket to null "+pendingSocket);
+          if (logger.level <= logger.FINE) {
+            logger.logException(EntityManager.this+".receiveSocketException("+ex+") setting pendingSocket to null "+pendingSocket, ex);
+          } else if (logger.level <= logger.INFO) {
+            logger.log(EntityManager.this+".receiveSocketException("+ex+") setting pendingSocket to null "+pendingSocket);
+          }
 
           stopLivenessChecker();
           pendingSocket = null; 
@@ -881,7 +889,7 @@ public class PriorityTransportLayerImpl<Identifier> implements PriorityTransport
         // drop the lowest priority message if the queue is overflowing        
         while (queue.size() > MAX_QUEUE_SIZE) {
           MessageWrapper w = queue.removeLast();
-          if (logger.level <= Logger.CONFIG) logger.log("Dropping "+w+" because queue is full. MAX_QUEUE_SIZE:"+MAX_QUEUE_SIZE);
+          if (logger.level <= Logger.INFO+50) logger.log("Dropping "+w+" because queue is full. MAX_QUEUE_SIZE:"+MAX_QUEUE_SIZE);
           w.drop();
         }
       }
@@ -1120,6 +1128,7 @@ public class PriorityTransportLayerImpl<Identifier> implements PriorityTransport
             } else {
               // done
               if (msgs.removeFirst() != this) throw new RuntimeException("Error, removing first was not this!"+this); 
+              if (deliverAckToMe != null) deliverAckToMe.ack(this);
               sendNextMessage();
             }
           }
@@ -1549,6 +1558,7 @@ public class PriorityTransportLayerImpl<Identifier> implements PriorityTransport
 //        }
 
         if (e instanceof ClosedChannelException) {
+          closeMe(socket);
           return;
         }
         
@@ -1559,7 +1569,7 @@ public class PriorityTransportLayerImpl<Identifier> implements PriorityTransport
         }
         
         if (e instanceof IOException) {
-          if (e.getMessage().equals("An established connection was aborted by the software in your host machine")) {
+          if (e.getMessage() != null && e.getMessage().equals("An established connection was aborted by the software in your host machine")) {
             printError = false;
           }
         }

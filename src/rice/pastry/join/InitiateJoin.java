@@ -46,7 +46,7 @@ import java.util.*;
 /**
  * Request for the join protocols on the local node to join the overlay.
  * 
- * @version $Id: InitiateJoin.java 4209 2008-04-29 14:55:32Z jeffh $
+ * @version $Id$
  * 
  * @author Andrew Ladd
  */

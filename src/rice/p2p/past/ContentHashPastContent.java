@@ -49,7 +49,7 @@ import rice.p2p.commonapi.*;
  *
  * Provided as a convenience.
  *
- * @version $Id: ContentHashPastContent.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * @author Peter Druschel
  * @author Alan Mislove
  */

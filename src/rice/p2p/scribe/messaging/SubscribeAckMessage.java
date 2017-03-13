@@ -59,7 +59,7 @@ import rice.p2p.scribe.rawserialization.ScribeContentDeserializer;
  * 
  * TODO: Consider breaking up these functions.
  *
- * @version $Id: SubscribeAckMessage.java 3816 2007-08-01 17:54:53Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

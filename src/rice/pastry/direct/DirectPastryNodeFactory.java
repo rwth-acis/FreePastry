@@ -66,7 +66,7 @@ import org.mpisws.p2p.transport.proximity.ProximityProvider;
 /**
  * Pastry node factory for direct connections between nodes (local instances).
  *
- * @version $Id: DirectPastryNodeFactory.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Andrew Ladd
  * @author Sitaram Iyer

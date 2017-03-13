@@ -46,7 +46,7 @@ import java.util.*;
 /**
  * Request a leaf set from another node.
  * 
- * @version $Id: RequestLeafSet.java 3855 2007-09-14 15:46:49Z jeffh $
+ * @version $Id$
  * 
  * @author Andrew Ladd
  */

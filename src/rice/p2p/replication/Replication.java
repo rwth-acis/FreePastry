@@ -52,7 +52,7 @@ import rice.p2p.commonapi.*;
  * In the RM literature, k is called the ReplicaFactor and is used when
  * an instance of the replica manager is being instantiated.
  *
- * @version $Id: Replication.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

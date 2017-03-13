@@ -42,7 +42,7 @@ import java.util.*;
 /**
  * An interface to a generic set of nodes.
  *
- * @version $Id: NodeSetI.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * @author Andrew Ladd
  */

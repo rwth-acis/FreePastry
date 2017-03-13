@@ -49,7 +49,7 @@ import rice.p2p.util.TimerWeakHashMap;
  * child is about to be added or removed, or when the the local node is about to be implicitly
  * subscribed to a new topic.
  *
- * @version $Id: ScribePolicy.java 4098 2008-02-13 09:36:33Z jeffh $
+ * @version $Id$
  * @author Alan Mislove
  */
 public interface ScribePolicy {
@@ -155,7 +155,7 @@ public interface ScribePolicy {
    * The default policy for Scribe, which always allows new children to join and adds children in
    * the order in which they are provided, implicitly providing a depth-first search.
    *
-   * @version $Id: ScribePolicy.java 4098 2008-02-13 09:36:33Z jeffh $
+   * @version $Id$
    * @author amislove
    */
   public static class DefaultScribePolicy implements ScribePolicy {
@@ -270,7 +270,7 @@ public interface ScribePolicy {
   /**
    * An optional policy for Scribe, which allows up to a specified number of children per topic.
    *
-   * @version $Id: ScribePolicy.java 4098 2008-02-13 09:36:33Z jeffh $
+   * @version $Id$
    * @author amislove
    */
   public static class LimitedScribePolicy extends DefaultScribePolicy {

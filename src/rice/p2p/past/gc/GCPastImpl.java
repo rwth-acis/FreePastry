@@ -58,7 +58,7 @@ import rice.persistence.*;
  * This class is an implementation of the GCPast interface, which provides
  * Past services with garbage collection.
  *
- * @version $Id: GCPastImpl.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * @author Alan Mislove
  * @author Andreas Haeberlen
  */

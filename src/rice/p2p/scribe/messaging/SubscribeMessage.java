@@ -53,7 +53,7 @@ import rice.p2p.scribe.rawserialization.*;
 /**
  * @(#) SubscribeMessage.java The subscribe message.
  *
- * @version $Id: SubscribeMessage.java 3801 2007-07-18 15:04:40Z jeffh $
+ * @version $Id$
  * @author Alan Mislove
  */
 public class SubscribeMessage extends AnycastMessage {

@@ -46,7 +46,7 @@ import java.util.*;
 /**
  * A very simple ping object.
  * 
- * @version $Id: PingClient.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * 
  * @author Andrew Ladd
  */

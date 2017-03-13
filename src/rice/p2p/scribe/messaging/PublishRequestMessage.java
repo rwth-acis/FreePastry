@@ -50,7 +50,7 @@ import rice.p2p.scribe.rawserialization.*;
  *
  * The publish message.
  *
- * @version $Id: PublishRequestMessage.java 3850 2007-09-10 15:53:23Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

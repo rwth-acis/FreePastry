@@ -56,7 +56,7 @@ import rice.pastry.dist.*;
  * This class represents a certificate for a specific ring attached, which
  * contains informtation about the ring, such as bootstraps, etc...
  *
- * @version $Id: RingCertificate.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

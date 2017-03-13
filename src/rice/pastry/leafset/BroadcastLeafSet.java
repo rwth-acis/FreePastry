@@ -46,7 +46,7 @@ import java.util.*;
 /**
  * Broadcast a leaf set to another node.
  * 
- * @version $Id: BroadcastLeafSet.java 3855 2007-09-14 15:46:49Z jeffh $
+ * @version $Id$
  * 
  * @author Andrew Ladd
  */

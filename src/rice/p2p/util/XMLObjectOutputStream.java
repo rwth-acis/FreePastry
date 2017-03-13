@@ -59,7 +59,7 @@ import java.util.*;
  * designed to be able to write objects which can then be deserialized using 
  * JSX, however, this has not been fully tested and bugs may be encountered.
  *
- * @version $Id: XMLObjectOutputStream.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

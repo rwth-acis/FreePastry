@@ -46,7 +46,7 @@ import rice.environment.random.RandomSource;
  * This class contains a large number of static methods for performing
  * math operations.
  *
- * @version $Id: MathUtils.java 4549 2008-10-16 18:21:19Z jeffh $
+ * @version $Id$
  * @author amislove
  */
 public class MathUtils {
@@ -251,6 +251,29 @@ public class MathUtils {
     return result;
   }
 
+  /**
+   * Utility method for converting a short into a byte[]
+   *
+   * @param input The log to convert
+   * @return a byte[] representation
+   */
+  public static byte[] shortToByteArray(short input) {
+    byte[] output = new byte[2];
+    shortToByteArray(input, output, 0);
+    return output;
+  }
+  
+  /**
+   * Utility method for converting a short into a byte[]
+   *
+   * @param input The log to convert
+   * @return a byte[] representation
+   */
+  public static void shortToByteArray(short input, byte[] output, int offset) {
+    output[offset + 0] = (byte) (0xFF & (input >> 8));
+    output[offset + 1] = (byte) (0xFF & input);
+  }
+  
   public static short byteArrayToShort(byte[] input) {
     return byteArrayToShort(input,0);
   }

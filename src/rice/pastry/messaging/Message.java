@@ -44,7 +44,7 @@ import rice.pastry.*;
 /**
  * This is an abstract implementation of a message object.
  * 
- * @version $Id: Message.java 3818 2007-08-02 13:08:10Z jeffh $
+ * @version $Id$
  * 
  * @author Andrew Ladd
  * @author Sitaram Iyer

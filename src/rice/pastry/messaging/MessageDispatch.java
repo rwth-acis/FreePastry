@@ -57,7 +57,7 @@ import rice.pastry.transport.Deserializer;
  * TODO:  We need to make it explicit which apps can receive messages before
  * PastryNode.isReady().
  * 
- * @version $Id: MessageDispatch.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Jeff Hoye
  * @author Andrew Ladd

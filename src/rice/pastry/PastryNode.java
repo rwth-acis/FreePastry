@@ -83,7 +83,7 @@ import rice.pastry.transport.SocketAdapter;
 /**
  * A Pastry node is single entity in the pastry network.
  * 
- * @version $Id: PastryNode.java 4664 2009-02-23 18:06:07Z jeffh $
+ * @version $Id$
  * 
  * @author Andrew Ladd
  */

@@ -40,7 +40,7 @@ package rice.pastry;
 /** 
  * An interface to any object capable of generating nodeIds.
  *
- * @version $Id: NodeIdFactory.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * @author Andrew Ladd
  */

@@ -53,7 +53,7 @@ import rice.environment.time.simulated.DirectTimeSource;
  * When activity occurs, it figures out who is interested in what has happened,
  * and hands off to that object.
  * 
- * @version $Id: SelectorManager.java 4675 2009-03-11 15:54:34Z jeffh $
+ * @version $Id$
  * @author Alan Mislove
  */
 public class SelectorManager extends Thread implements Timer, Destructable {

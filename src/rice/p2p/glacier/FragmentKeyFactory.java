@@ -48,7 +48,7 @@ import java.util.SortedMap;
 /**
  * DESCRIBE THE CLASS
  *
- * @version $Id: FragmentKeyFactory.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * @author ahae
  */
 public class FragmentKeyFactory implements IdFactory {

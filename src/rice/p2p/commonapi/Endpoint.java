@@ -56,7 +56,7 @@ import rice.p2p.commonapi.rawserialization.*;
  * the underlying protocol.  This represents the *local* node, upon which applications
  * can call methods.  
  *
- * @version $Id: Endpoint.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  * @author Peter Druschel

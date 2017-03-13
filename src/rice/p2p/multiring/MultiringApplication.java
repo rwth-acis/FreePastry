@@ -44,7 +44,7 @@ import rice.p2p.commonapi.*;
  *
  * Application which wraps a real application
  *
- * @version $Id: MultiringApplication.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * @author Alan Mislove
  * @author Peter Druschel

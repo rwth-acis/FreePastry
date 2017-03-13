@@ -49,7 +49,7 @@ import java.util.*;
  * 
  * a regression test suite for pastry.
  * 
- * @version $Id: DirectPastryRegrTest.java 3801 2007-07-18 15:04:40Z jeffh $
+ * @version $Id$
  * 
  * @author andrew ladd
  * @author peter druschel

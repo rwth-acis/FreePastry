@@ -50,7 +50,7 @@ import java.util.*;
  * the node handle verification which is necessary in the "real" pastry protocols,
  * since NodeHandles are sent across the wire.
  *
- * @version $Id: DistNodeHandle.java 4064 2007-12-26 13:39:34Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

@@ -46,7 +46,7 @@ import rice.p2p.glacier.*;
 /**
  * DESCRIBE THE CLASS
  *
- * @version $Id: GlacierQueryMessage.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * @author ahae
  */
 public class GlacierQueryMessage extends GlacierMessage {

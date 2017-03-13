@@ -53,7 +53,7 @@ import rice.p2p.util.rawserialization.JavaSerializedMessage;
  * This class represents a reminder to Past that an outstanding message exists,
  * and that the waiting continuation should be informed if the message is lost.
  *
- * @version $Id: MessageLostMessage.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  * @author Ansley Post

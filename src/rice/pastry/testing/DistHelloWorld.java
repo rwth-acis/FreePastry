@@ -58,7 +58,7 @@ import java.net.*;
  * as a different node. Do that a few times, watch LeafSet entries accumulate,
  * then in 30 seconds, watch the maintenance take over.
  * 
- * @version $Id: DistHelloWorld.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * 
  * @author Sitaram Iyer
  * @author Peter Druschel

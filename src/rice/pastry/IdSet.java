@@ -53,7 +53,7 @@ import rice.p2p.util.*;
  * If all clone() methods call super.clone(), then they are guaranteed to use 
  * Object.clone(), which always returns an object of the correct type.
  * 
- * @version $Id: IdSet.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Peter Druschel
  */

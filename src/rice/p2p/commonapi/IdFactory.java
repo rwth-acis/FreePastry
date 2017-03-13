@@ -45,7 +45,7 @@ import rice.environment.random.RandomSource;
  * @(#) IdFactory.java This interface provides applications with a way of generating Ids in a
  * protocol-specific manner.
  *
- * @version $Id: IdFactory.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * @author Alan Mislove
  * @author Peter Druschel
  */

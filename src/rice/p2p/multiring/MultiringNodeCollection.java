@@ -51,7 +51,7 @@ import rice.p2p.commonapi.rawserialization.RawMessage;
  * This class is the class which coordinates all of the nodes on a given
  * host, allowing the nodes to route messages between each other.  
  *
- * @version $Id: MultiringNodeCollection.java 4476 2008-09-19 14:58:35Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

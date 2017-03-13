@@ -51,7 +51,7 @@ import rice.p2p.scribe.rawserialization.ScribeContentDeserializer;
  *
  * The ack for a subscribe message.
  *
- * @version $Id: AbstractSubscribeMessage.java 3672 2007-04-12 10:46:09Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

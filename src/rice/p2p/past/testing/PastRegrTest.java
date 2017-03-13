@@ -59,7 +59,7 @@ import java.io.Serializable;
  *
  * Provides regression testing for the Past service
  *
- * @version $Id: PastRegrTest.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

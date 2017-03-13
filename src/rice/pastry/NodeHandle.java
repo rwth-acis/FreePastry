@@ -50,7 +50,7 @@ import java.util.*;
 /**
  * Interface for handles to remote nodes.
  *
- * @version $Id: NodeHandle.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Andrew Ladd
  */

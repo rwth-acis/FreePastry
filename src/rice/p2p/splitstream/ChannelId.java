@@ -44,7 +44,7 @@ import rice.p2p.commonapi.*;
  * understandable code. All it does is subclass the nodeId and provide a constructor that allows the
  * wrapping of a NodeId object to create a concrete subclass
  *
- * @version $Id: ChannelId.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * @author Ansley Post
  * @author Alan Mislove
  */

@@ -49,7 +49,7 @@ import rice.p2p.scribe.rawserialization.*;
 /**
  * @(#) AnycastMessage.java The anycast message.
  *
- * @version $Id: AnycastMessage.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * @author Alan Mislove
  */
 public class AnycastMessage extends ScribeMessage {

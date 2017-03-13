@@ -51,7 +51,7 @@ import java.util.*;
 /**
  * A hello world example for pastry. This is the "direct" driver.
  * 
- * @version $Id: HelloWorld.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * 
  * @author Sitaram Iyer
  */

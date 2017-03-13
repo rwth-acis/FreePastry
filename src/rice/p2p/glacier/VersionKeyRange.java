@@ -44,7 +44,7 @@ import rice.p2p.commonapi.rawserialization.*;
 /**
  * DESCRIBE THE CLASS
  *
- * @version $Id: VersionKeyRange.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * @author ahae
  */
 public class VersionKeyRange implements IdRange {

@@ -54,7 +54,7 @@ import rice.p2p.past.*;
  * which they are interested in.  Otherwise, objects may be reclaimed and
  * will be no longer available.
  *
- * @version $Id: GCPast.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * @author Alan Mislove
  * @author Andreas Haeberlen
  */

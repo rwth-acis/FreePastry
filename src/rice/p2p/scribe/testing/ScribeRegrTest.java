@@ -56,7 +56,7 @@ import rice.pastry.PastryNode;
  * @(#) DistScribeRegrTest.java Provides regression testing for the Scribe service using distributed
  * nodes.
  *
- * @version $Id: ScribeRegrTest.java 4221 2008-05-19 16:41:19Z jeffh $
+ * @version $Id$
  * @author Alan Mislove
  */
 
@@ -845,7 +845,7 @@ public class ScribeRegrTest extends CommonAPITest {
   /**
    * Utility class for past content objects
    *
-   * @version $Id: ScribeRegrTest.java 4221 2008-05-19 16:41:19Z jeffh $
+   * @version $Id$
    * @author amislove
    */
   protected static class TestScribeContent implements ScribeContent {
@@ -899,7 +899,7 @@ public class ScribeRegrTest extends CommonAPITest {
   /**
    * Utility class which simulates a route message
    *
-   * @version $Id: ScribeRegrTest.java 4221 2008-05-19 16:41:19Z jeffh $
+   * @version $Id$
    * @author amislove
    */
   protected static class TestRouteMessage implements RouteMessage {
@@ -991,7 +991,7 @@ public class ScribeRegrTest extends CommonAPITest {
   /**
    * DESCRIBE THE CLASS
    *
-   * @version $Id: ScribeRegrTest.java 4221 2008-05-19 16:41:19Z jeffh $
+   * @version $Id$
    * @author amislove
    */
   protected class TestScribeClient implements ScribeClient {

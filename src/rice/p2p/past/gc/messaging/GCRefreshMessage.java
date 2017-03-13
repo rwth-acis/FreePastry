@@ -54,7 +54,7 @@ import rice.p2p.past.gc.*;
  *
  * response is expected to be Boolean[]
  *
- * @version $Id: GCRefreshMessage.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

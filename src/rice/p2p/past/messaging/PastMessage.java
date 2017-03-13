@@ -50,7 +50,7 @@ import rice.p2p.past.*;
  *
  * This class the abstraction of a message used internally by Past.
  *
- * @version $Id: PastMessage.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  * @author Ansley Post

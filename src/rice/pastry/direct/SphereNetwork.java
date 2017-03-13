@@ -49,7 +49,7 @@ import rice.pastry.messaging.*;
  * Sphere network topology and idealized node life. Emulates a network of nodes that are randomly
  * placed on a sphere. Proximity is based on euclidean distance on the sphere.
  *
- * @version $Id: SphereNetwork.java 3926 2007-10-24 15:44:09Z jeffh $
+ * @version $Id$
  * @author Y. Charlie Hu
  * @author Rongmei Zhang
  */

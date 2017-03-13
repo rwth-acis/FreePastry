@@ -54,7 +54,7 @@ import java.net.*;
  * See the usage for more information, the -protocol option can be used to
  * specify which protocol to run the test with.
  * 
- * @version $Id: DistPastryRegrTest.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * 
  * @author Alan Mislove
  */

@@ -50,7 +50,7 @@ import rice.p2p.commonapi.*;
  * a handle is sometimes very short, and applications should keep references to an
  * object by Id rather than handle.
  *
- * @version $Id: PastContentHandle.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * @author Alan Mislove
  * @author Ansley Post
  * @author Peter Druschel 

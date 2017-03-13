@@ -51,7 +51,7 @@ import rice.pastry.standard.RandomNodeIdFactory;
 /**
  * This class tests the correctness of the leafset in Pastry.
  * 
- * @version $Id: LeafSetTest.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * 
  * @author Alan Mislove
  */

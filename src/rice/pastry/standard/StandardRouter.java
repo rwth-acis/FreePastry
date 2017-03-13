@@ -63,7 +63,7 @@ import rice.pastry.client.PastryAppl;
 /**
  * An implementation of the standard Pastry routing algorithm.
  * 
- * @version $Id: StandardRouter.java 4640 2008-12-18 12:22:43Z jeffh $
+ * @version $Id$
  * 
  * @author Andrew Ladd
  * @author Rongmei Zhang/Y.Charlie Hu

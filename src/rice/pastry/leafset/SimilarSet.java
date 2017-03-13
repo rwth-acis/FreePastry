@@ -46,7 +46,7 @@ import java.io.*;
  * A set of nodes, ordered by numerical distance of their Id from the local
  * Id
  * 
- * @version $Id: SimilarSet.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * 
  * @author Andrew Ladd
  * @author Peter Druschel

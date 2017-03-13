@@ -47,7 +47,7 @@ import rice.p2p.commonapi.*;
  * This interface represents client of the replication manager, which is the
  * ultimate user of the replication.
  *
- * @version $Id: ReplicationManagerClient.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

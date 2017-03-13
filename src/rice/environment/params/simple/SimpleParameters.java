@@ -201,6 +201,13 @@ public class SimpleParameters implements Parameters {
     }
   }
 
+  public void restoreDefault(String name) {    
+    if (properties.getProperty(name) != null) {
+      properties.remove(name);
+      fireChangeEvent(name, defaults.getProperty(name));
+    }    
+  }
+  
   public void remove(String name) {
     properties.remove(name);
     fireChangeEvent(name, null);
@@ -358,7 +365,9 @@ public class SimpleParameters implements Parameters {
       File next = new File(configFileName + ".new");
       File old = new File(configFileName + ".old");
 
-      properties.store(new FileOutputStream(next), null);
+      FileOutputStream fos = new FileOutputStream(next);
+      properties.store(fos, null);
+      fos.close();
       
       current.renameTo(old);
       next.renameTo(current);

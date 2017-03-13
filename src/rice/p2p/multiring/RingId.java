@@ -49,7 +49,7 @@ import rice.p2p.commonapi.rawserialization.*;
  *
  * This class represents an Id with a specific ring attached.
  *
- * @version $Id: RingId.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

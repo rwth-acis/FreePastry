@@ -70,7 +70,7 @@ import java.net.*;
  * <p/>the <code>dataSent()</code>/<code>dataReceived()</code> methods include a wireType.  These tell you if the 
  * data was TCP/UDP and wether it was part of the SourceRoute
  *
- * @version $Id: NetworkListener.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * @author Jeff Hoye
  */

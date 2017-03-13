@@ -56,7 +56,7 @@ import rice.p2p.scribe.rawserialization.*;
 /**
  * @(#) ScribeImpl.java Thie provided implementation of Scribe.
  *
- * @version $Id: ScribeImpl.java 4495 2008-09-26 14:48:02Z jeffh $
+ * @version $Id$
  * @author Alan Mislove
  */
 public class ScribeImpl implements Scribe, MaintainableScribe, Application, Observer {
@@ -2083,7 +2083,7 @@ public class ScribeImpl implements Scribe, MaintainableScribe, Application, Obse
   /**
    * Class which keeps track of a given topic
    *
-   * @version $Id: ScribeImpl.java 4495 2008-09-26 14:48:02Z jeffh $
+   * @version $Id$
    * @author amislove
    */
   public class TopicManager {

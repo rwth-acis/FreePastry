@@ -61,7 +61,7 @@ import rice.selector.TimerTask;
 /**
  * An implementation of a periodic-style leafset protocol
  * 
- * @version $Id: PeriodicLeafSetProtocol.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * 
  * @author Alan Mislove
  */

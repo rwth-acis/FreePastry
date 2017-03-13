@@ -47,7 +47,7 @@ import rice.p2p.commonapi.rawserialization.OutputBuffer;
  *
  * An interface to a generic set of node handles.
  *
- * @version $Id: NodeHandleSet.java 4098 2008-02-13 09:36:33Z jeffh $
+ * @version $Id$
  *
  * @author Jeff Hoye
  * @author Alan Mislove

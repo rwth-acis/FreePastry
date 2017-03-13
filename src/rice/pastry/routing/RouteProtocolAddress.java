@@ -44,7 +44,7 @@ import java.io.*;
 /**
  * The address of the route protocol at a pastry node.
  * 
- * @version $Id: RouteProtocolAddress.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * 
  * @author Andrew Ladd
  */

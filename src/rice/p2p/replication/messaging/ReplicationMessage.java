@@ -48,7 +48,7 @@ import rice.p2p.replication.*;
  *
  * This class the abstraction of a message used internally by replication.
  *
- * @version $Id: ReplicationMessage.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

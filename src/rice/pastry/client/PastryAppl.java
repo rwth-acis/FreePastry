@@ -59,7 +59,7 @@ import org.mpisws.p2p.transport.util.OptionsFactory;
  * A PastryAppl is an abstract class that every Pastry application
  * extends.  This is the external Pastry API.
  *
- * @version $Id: PastryAppl.java 4226 2008-05-28 14:56:19Z jeffh $
+ * @version $Id$
  *
  * @author Peter Druschel
  */

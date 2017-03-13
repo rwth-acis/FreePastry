@@ -46,7 +46,7 @@ import rice.p2p.scribe.*;
  * The interface defines the methods that a splitStream object must implement. The methods are for
  * creating a channel and for attaching to an already existing channel
  *
- * @version $Id: SplitStream.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * @author Ansley Post
  * @author Alan Mislove
  */

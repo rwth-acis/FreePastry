@@ -66,7 +66,7 @@ import java.util.*;
  * <EM>digit</EM>. An <EM>index</EM> of <EM>0</EM> is the least
  * significant digit.
  * 
- * @version $Id: RoutingTable.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * 
  * @author Andrew Ladd
  * @author Peter Druschel

@@ -44,7 +44,7 @@ import rice.p2p.commonapi.*;
  *
  * This class represents a reminder for the replication to intiate maintaince.
  *
- * @version $Id: ReminderMessage.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

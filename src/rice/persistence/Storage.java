@@ -43,7 +43,7 @@ package rice.persistence;
  * @author Ansley Post
  * @author Alan Mislove
  *
- * @version $Id: Storage.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  */
 import java.io.*;
 

@@ -60,7 +60,7 @@ import rice.p2p.util.rawserialization.JavaSerializedMessage;
  * This class wraps an endpoint and allows for applications to transparently
  * use multiring functionality.
  *
- * @version $Id: MultiringEndpoint.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

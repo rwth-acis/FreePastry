@@ -44,7 +44,7 @@ import rice.pastry.messaging.Message;
 /**
  * Initiate leaf set maintenance on the local node.
  * 
- * @version $Id: InitiatePingNeighbor.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * 
  * @author Peter Druschel
  */

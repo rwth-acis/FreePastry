@@ -46,7 +46,7 @@ import rice.p2p.util.*;
 /**
  * DESCRIBE THE CLASS
  *
- * @version $Id: VersionKeySet.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * @author ahae
  */
 public class VersionKeySet implements rice.p2p.commonapi.IdSet {

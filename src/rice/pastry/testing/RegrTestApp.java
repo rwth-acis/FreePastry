@@ -49,7 +49,7 @@ import java.util.*;
  * 
  * A regression test suite for pastry. This is the per-node app object.
  * 
- * @version $Id: RegrTestApp.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * 
  * @author andrew ladd
  * @author peter druschel

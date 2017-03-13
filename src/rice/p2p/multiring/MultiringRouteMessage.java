@@ -47,7 +47,7 @@ import java.io.*;
  *
  * This wraps a real RouteMessage.
  *
- * @version $Id: MultiringRouteMessage.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * @author Alan Mislove
  * @author Peter Druschel

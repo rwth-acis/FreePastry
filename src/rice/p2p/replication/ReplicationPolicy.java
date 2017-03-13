@@ -48,7 +48,7 @@ import rice.p2p.replication.messaging.*;
  * which is asked whenever the replication manager need to make an application-specific
  * decision.
  *
- * @version $Id: ReplicationPolicy.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * @author Alan Mislove
  */
 public interface ReplicationPolicy {

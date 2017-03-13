@@ -41,7 +41,7 @@ package rice.persistence;
  *
  * @author Ansley Post
  * @author Alan Mislove
- * @version $Id: Cache.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  */
 import java.io.*;
 
@@ -55,7 +55,7 @@ import rice.p2p.commonapi.*;
  * the LRUCache and GDSCache. This interface extends the Catalog
  * interface, as the cache provides a Catalog service.
  *
- * @version $Id: Cache.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  */
 @SuppressWarnings("unchecked")
 public interface Cache extends Catalog {

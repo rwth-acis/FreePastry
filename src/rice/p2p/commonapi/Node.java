@@ -47,7 +47,7 @@ import rice.environment.Environment;
  * give a application an Endpoint which it can use to send and receive
  * messages.
  *
- * @version $Id: Node.java 3992 2007-12-02 20:09:18Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  * @author Peter Druschel

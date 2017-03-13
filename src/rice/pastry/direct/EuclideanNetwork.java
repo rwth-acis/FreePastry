@@ -50,7 +50,7 @@ import rice.pastry.messaging.*;
  * Euclidean network topology and idealized node life. Emulates a network of nodes that are randomly
  * placed in a plane. Proximity is based on euclidean distance in the plane.
  *
- * @version $Id: EuclideanNetwork.java 3926 2007-10-24 15:44:09Z jeffh $
+ * @version $Id$
  * @author Andrew Ladd
  * @author Rongmei Zhang
  */

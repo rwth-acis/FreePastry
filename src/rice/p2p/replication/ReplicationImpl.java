@@ -57,7 +57,7 @@ import rice.p2p.util.*;
  *
  * This is the implementation of the replication manager.
  *
- * @version $Id: ReplicationImpl.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

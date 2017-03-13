@@ -52,7 +52,7 @@ import rice.pastry.routing.*;
  * 2nd International Workshop on Peer-to-peer Systems (IPTPS'03) , Berkeley, CA,
  * February 2003.
  * 
- * @version $Id: CommonAPIAppl.java 3801 2007-07-18 15:04:40Z jeffh $
+ * @version $Id$
  * 
  * @author Peter Druschel
  */

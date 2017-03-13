@@ -53,7 +53,7 @@ import rice.p2p.scribe.rawserialization.ScribeContentDeserializer;
  * local node is part of.
  * @(#) SplitStreamImpl.java
  *
- * @version $Id: SplitStreamImpl.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * @author Ansley Post
  * @author Alan Mislove
  */

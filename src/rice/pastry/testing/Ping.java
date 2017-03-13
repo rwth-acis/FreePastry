@@ -49,7 +49,7 @@ import java.util.*;
  * 
  * A performance test suite for pastry. This is the per-node app object.
  * 
- * @version $Id: Ping.java 3801 2007-07-18 15:04:40Z jeffh $
+ * @version $Id$
  * 
  * @author Rongmei Zhang
  */

@@ -49,7 +49,7 @@ import rice.p2p.replication.*;
  * This class represents a response for a set of keys in the replication
  * system.
  *
- * @version $Id: ResponseMessage.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

@@ -44,7 +44,7 @@ import rice.p2p.commonapi.*;
  *
  * The maintenance message.
  *
- * @version $Id: MaintenanceMessage.java 3648 2007-03-13 13:50:48Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

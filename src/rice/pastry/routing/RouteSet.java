@@ -47,7 +47,7 @@ import java.io.*;
  * bounded number of the closest node handles. Since proximity value can change
  * unpredictably, we don't keep the set in sorted order.
  * 
- * @version $Id: RouteSet.java 4060 2007-12-21 17:49:36Z jeffh $
+ * @version $Id$
  * 
  * @author Andrew Ladd
  * @author Peter Druschel

@@ -47,7 +47,7 @@ import java.util.*;
  * Class which is an implementation of a reverse tree map, maintaining tree
  * maps for both the keys and values
  *
- * @version $Id: ReverseTreeMap.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

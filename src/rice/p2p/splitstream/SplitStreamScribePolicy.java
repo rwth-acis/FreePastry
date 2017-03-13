@@ -51,7 +51,7 @@ import rice.pastry.routing.RoutingTable;
  * who have the stripe in question as their primary stripe, and then the nodes
  * who do not.
  *
- * @version $Id: SplitStreamScribePolicy.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * @author Alan Mislove
  * @author Atul Singh
  */

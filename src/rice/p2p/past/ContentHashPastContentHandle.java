@@ -49,7 +49,7 @@ import rice.p2p.past.rawserialization.RawPastContentHandle;
  *
  * A handle class for content-hash objects stored in Past.
  *
- * @version $Id: ContentHashPastContentHandle.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * @author Peter Druschel
  */
 public class ContentHashPastContentHandle implements RawPastContentHandle {

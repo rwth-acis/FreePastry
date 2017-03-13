@@ -48,7 +48,7 @@ import rice.p2p.commonapi.*;
  * This interface represents a client using the Scribe system.
  *
  * @deprecated use ScribeMultiClient
- * @version $Id: ScribeClient.java 3673 2007-04-12 10:46:28Z jeffh $
+ * @version $Id$
  * @author Alan Mislove
  */
 public interface ScribeClient {

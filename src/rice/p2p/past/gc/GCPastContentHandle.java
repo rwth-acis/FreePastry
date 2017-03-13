@@ -50,7 +50,7 @@ import rice.p2p.past.*;
  * garbage-collected version of Past.  It adds support for a version number as 
  * well as the current expiration time.
  *
- * @version $Id: GCPastContentHandle.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * @author Alan Mislove
  * @author Andreas Haeberlen
  */

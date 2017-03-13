@@ -61,7 +61,7 @@ import rice.pastry.standard.RandomNodeIdFactory;
  * commonapi.  Currently is written to use Pastry nodes, but this will be abstracted
  * away. 
  *
- * @version $Id: MultiringRegrTest.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

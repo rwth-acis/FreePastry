@@ -53,7 +53,7 @@ import rice.p2p.scribe.*;
  * a digit and second digit by 8. So, if channelId is <0x1AB88..>, then stripe id's generated are <0x08B88..>,
  * <0x18B88..>, <0x28B88..> etc. 
  *
- * @version $Id: Channel.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * @author Ansley Post
  * @author Alan Mislove
  * @author Atul Singh

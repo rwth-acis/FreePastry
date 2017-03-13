@@ -49,7 +49,7 @@ import java.io.*;
 /**
  * A hello world example for pastry. This is the per-node app object.
  * 
- * @version $Id: HelloWorldApp.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * 
  * @author Sitaram Iyer
  */

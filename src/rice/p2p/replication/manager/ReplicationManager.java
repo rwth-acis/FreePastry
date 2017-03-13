@@ -48,7 +48,7 @@ import rice.p2p.replication.*;
  * successive fetches, performs backoffs in the case of network congestion,
  * and generally makes it easier for replication clients.
  *
- * @version $Id: ReplicationManager.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

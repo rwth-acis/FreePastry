@@ -43,7 +43,7 @@ import rice.pastry.direct.TestRecord;
  * 
  * A performance test suite for pastry.
  * 
- * @version $Id: PingTestRecord.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * 
  * @author Rongmei Zhang
  */

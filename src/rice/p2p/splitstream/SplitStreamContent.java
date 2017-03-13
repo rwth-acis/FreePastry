@@ -47,7 +47,7 @@ import rice.p2p.scribe.rawserialization.RawScribeContent;
 /**
  * This represents data sent through scribe for splitstream
  *
- * @version $Id: SplitStreamContent.java 3810 2007-07-30 12:59:55Z jeffh $
+ * @version $Id$
  * @author Alan Mislove
  */
 public class SplitStreamContent implements RawScribeContent {

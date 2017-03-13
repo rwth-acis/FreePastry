@@ -46,7 +46,7 @@ import rice.p2p.commonapi.rawserialization.OutputBuffer;
  *
  * Represents a contiguous range of Ids.
  * 
- * @version $Id: IdRange.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * @author Alan Mislove
  * @author Peter Druschel

@@ -52,7 +52,7 @@ import rice.p2p.scribe.rawserialization.ScribeContentDeserializer;
  * support it.  Note that this does not necessarily mean that the parent
  * has failed.
  *
- * @version $Id: DropMessage.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

@@ -50,7 +50,7 @@ import rice.p2p.commonapi.rawserialization.RawSerializable;
  * coalesced for memory efficiency.  New Ids are to be constructed from the build() methods, which
  * ensure that only one copy of each Id is in memory at a time.
  *
- * @version $Id: Id.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * @author Andrew Ladd
  * @author Peter Druschel
  * @author Alan Mislove
@@ -987,7 +987,7 @@ public class Id implements rice.p2p.commonapi.Id, RawSerializable {
   /**
    * A class for representing and manipulating the distance between two Ids on the circle.
    *
-   * @version $Id: Id.java 4654 2009-01-08 16:33:07Z jeffh $
+   * @version $Id$
    * @author amislove
    */
   public static class Distance implements rice.p2p.commonapi.Id.Distance {

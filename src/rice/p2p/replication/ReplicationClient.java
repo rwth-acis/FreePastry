@@ -45,7 +45,7 @@ import rice.p2p.commonapi.*;
  * This interface should be implemented by all applications that interact
  * with the Replica Manager.
  *
- * @version $Id: ReplicationClient.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

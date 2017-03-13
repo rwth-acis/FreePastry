@@ -54,7 +54,7 @@ import rice.p2p.commonapi.*;
  * @author Ansley Post
  * @author Alan Mislove
  *
- * @version $Id: StorageManager.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  */
 public interface StorageManager extends Cache, Storage {
 

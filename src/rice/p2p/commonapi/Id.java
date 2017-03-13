@@ -45,7 +45,7 @@ import rice.p2p.commonapi.rawserialization.*;
 /**
  * @(#) Id.java This interface is an abstraction of an Id (or key) from the CommonAPI paper.
  *
- * @version $Id: Id.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * @author Alan Mislove
  * @author Peter Druschel
  */
@@ -97,7 +97,7 @@ public interface Id extends Comparable<Id>, Serializable {
   /**
    * A class for representing and manipulating the distance between two Ids on the circle.
    *
-   * @version $Id: Id.java 4654 2009-01-08 16:33:07Z jeffh $
+   * @version $Id$
    * @author amislove
    */
   public static interface Distance extends Comparable<Distance>, Serializable {

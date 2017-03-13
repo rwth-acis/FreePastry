@@ -51,7 +51,7 @@ import java.util.*;
 /**
  * The interface to an object which can construct PastryNodes.
  *
- * @version $Id: PastryNodeFactory.java 4131 2008-02-27 18:27:49Z jeffh $
+ * @version $Id$
  *
  * @author Andrew Ladd
  * @author Alan Mislove

@@ -44,7 +44,7 @@ package rice.p2p.aggregation;
  * The additional functions are used mainly to recover from failures,
  * i.e. cases in which the service loses its local metadata.
  *
- * @version $Id: Aggregation.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * @author Andreas Haeberlen
  */
 

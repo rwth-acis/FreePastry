@@ -43,7 +43,7 @@ package rice.persistence.testing;
  * @author Ansley Post
  * @author Alan Mislove
  *
- * @version $Id: LRUCacheTest.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  */
 import java.io.IOException;
 import java.util.*;

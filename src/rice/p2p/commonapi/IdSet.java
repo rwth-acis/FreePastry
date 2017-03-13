@@ -45,7 +45,7 @@ import java.util.*;
  *
  * Represents a set of ids.
  * 
- * @version $Id: IdSet.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  * @author Peter Druschel

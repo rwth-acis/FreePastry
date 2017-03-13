@@ -44,7 +44,7 @@ import rice.p2p.past.*;
  * 
  * Any exception specific to Past.
  *
- * @version $Id: GCPastException.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * @author Peter Druschel 
  */
 public class GCPastException extends PastException {

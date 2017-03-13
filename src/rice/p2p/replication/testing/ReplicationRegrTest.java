@@ -50,7 +50,7 @@ import rice.persistence.MemoryStorage;
  * @(#) ReplicationRegrTest.java Provides regression testing for the replication service using distributed
  * nodes.
  *
- * @version $Id: ReplicationRegrTest.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * @author Alan Mislove
  */
 @SuppressWarnings("unchecked")
@@ -248,7 +248,7 @@ public class ReplicationRegrTest extends CommonAPITest {
   /**
    * DESCRIBE THE CLASS
    *
-   * @version $Id: ReplicationRegrTest.java 4654 2009-01-08 16:33:07Z jeffh $
+   * @version $Id$
    * @author amislove
    */
   protected class TestReplicationClient implements ReplicationClient {

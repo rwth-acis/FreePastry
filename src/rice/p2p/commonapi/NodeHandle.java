@@ -51,7 +51,7 @@ import rice.p2p.commonapi.rawserialization.OutputBuffer;
  *
  * This class is (unfortunately) an abstact class due to the need to be observable.
  *
- * @version $Id: NodeHandle.java 4231 2008-06-24 12:22:18Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  * @author Peter Druschel

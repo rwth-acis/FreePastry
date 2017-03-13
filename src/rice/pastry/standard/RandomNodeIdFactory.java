@@ -47,7 +47,7 @@ import java.security.*;
  * Constructs random node ids by SHA'ing consecutive numbers, with random
  * starting value.
  * 
- * @version $Id: RandomNodeIdFactory.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * 
  * @author Andrew Ladd
  * @author Peter Druschel

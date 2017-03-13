@@ -44,7 +44,7 @@ import java.util.*;
 /**
  * IdRangeUnit tests the IdRange class.
  * 
- * @version $Id: IdRangeUnit.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * 
  * @author Peter Druschel
  */

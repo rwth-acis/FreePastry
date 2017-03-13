@@ -47,7 +47,7 @@ import rice.p2p.commonapi.rawserialization.*;
  *
  * Represents a contiguous range of Ids with garbage collection times.
  * 
- * @version $Id: GCIdRange.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

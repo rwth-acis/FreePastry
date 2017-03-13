@@ -40,7 +40,7 @@ package rice.pastry;
 /**
  * A class which stores changes to a node set.
  *
- * @version $Id: NodeSetUpdate.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * @author Andrew Ladd
  */

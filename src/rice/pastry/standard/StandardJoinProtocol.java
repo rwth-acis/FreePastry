@@ -61,7 +61,7 @@ import java.util.*;
  * causes respondToJoiner() on last hop
  * causes completeJoin() on joiner
  * 
- * @version $Id: StandardJoinProtocol.java 4222 2008-05-26 09:14:30Z jeffh $
+ * @version $Id$
  * 
  * @author Peter Druschel
  * @author Andrew Ladd

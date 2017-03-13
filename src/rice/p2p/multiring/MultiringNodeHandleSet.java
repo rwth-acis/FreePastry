@@ -47,7 +47,7 @@ import rice.p2p.commonapi.rawserialization.*;
  *
  * An implementation of a NodeHandleSet for use with multiple rings
  *
- * @version $Id: MultiringNodeHandleSet.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

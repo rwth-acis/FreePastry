@@ -45,7 +45,7 @@ import rice.p2p.commonapi.rawserialization.*;
 /**
  * Represents an ordered set of NodeHandles. *
  * 
- * @version $Id: NodeSet.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * 
  * @author Peter Druschel
  */

@@ -52,7 +52,7 @@ import rice.p2p.util.rawserialization.*;
  * This class the abstraction of a message used internally by Past which serves
  * as a continuation (for receiving the results of an operation).
  *
- * @version $Id: ContinuationMessage.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  * @author Ansley Post

@@ -48,7 +48,7 @@ import rice.pastry.messaging.*;
 /**
  * This class is an internal message to the commonapi gluecode.
  *
- * @version $Id: PastryEndpointMessage.java 4295 2008-07-18 15:38:04Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  * @author Peter Druschel

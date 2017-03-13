@@ -52,7 +52,7 @@ import rice.pastry.messaging.*;
 /**
  * Interface to an object which is simulating the network.
  * 
- * @version $Id: NetworkSimulator.java 4221 2008-05-19 16:41:19Z jeffh $
+ * @version $Id$
  * 
  * @author Andrew Ladd
  */

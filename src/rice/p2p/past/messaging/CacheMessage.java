@@ -52,7 +52,7 @@ import rice.p2p.past.rawserialization.*;
  * This class represents message which pushes an object forward one hop in order
  * to be cached.
  *
- * @version $Id: CacheMessage.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  * @author Ansley Post

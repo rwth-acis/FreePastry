@@ -48,7 +48,7 @@ import rice.p2p.commonapi.*;
  * This class provides the ability to build Ids which can support a multi-ring
  * hierarchy.
  *
- * @version $Id: GCIdFactory.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * @author Alan Mislove
  * @author Peter Druschel
  */

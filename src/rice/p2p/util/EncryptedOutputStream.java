@@ -55,7 +55,7 @@ import java.util.*;
  * 
  * where each chunk is length(data) [4 bytes] followed by data
  *
- * @version $Id: EncryptedOutputStream.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

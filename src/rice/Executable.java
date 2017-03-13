@@ -41,7 +41,7 @@ package rice;
  * Asynchronously executes a processing function, and returns the result.  
  * Just like Runnable, but has a return value;
  *
- * @version $Id: Executable.java 4520 2008-10-10 15:04:07Z jstewart $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

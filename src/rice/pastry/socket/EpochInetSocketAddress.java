@@ -45,7 +45,7 @@ import rice.p2p.commonapi.rawserialization.*;
 /**
  * Class which represets a source route to a remote IP address.
  *
- * @version $Id: EpochInetSocketAddress.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * @author Alan Mislove
  */
 public class EpochInetSocketAddress implements Serializable {

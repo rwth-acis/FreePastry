@@ -51,7 +51,7 @@ import rice.p2p.replication.manager.*;
  * @(#) ReplicationRegrTest.java Provides regression testing for the replication manager service using distributed
  * nodes.
  *
- * @version $Id: ReplicationManagerRegrTest.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * @author Alan Mislove
  */
 @SuppressWarnings("unchecked")
@@ -388,7 +388,7 @@ public class ReplicationManagerRegrTest extends CommonAPITest {
   /**
    * DESCRIBE THE CLASS
    *
-   * @version $Id: ReplicationManagerRegrTest.java 4654 2009-01-08 16:33:07Z jeffh $
+   * @version $Id$
    * @author amislove
    */
   protected class TestReplicationManagerClient implements ReplicationManagerClient {

@@ -489,13 +489,17 @@ public class SocketManager extends SelectionKeyHandler implements P2PSocket<Inet
           logger.log(this+"read("+ret+")");
         }
       }    
+      tcp.notifyRead(ret,addr);
       return ret;
     } catch (IOException ioe) {
       if (logger.level <= Logger.FINE) {
         logger.logException(this+" error reading", ioe);
       } else if (logger.level <= Logger.INFO) logger.log(this+" error reading");
       close();
-      throw ioe;
+//      throw ioe;
+      ClosedChannelException throwMe = new ClosedChannelException("Socket closed");
+      throwMe.initCause(ioe);
+      throw throwMe;
     }
   }
 //  public long read(ByteBuffer[] dsts, int offset, int length) throws IOException {
@@ -515,6 +519,7 @@ public class SocketManager extends SelectionKeyHandler implements P2PSocket<Inet
           logger.log(this+"write("+ret+")");
         }
       }
+      tcp.notifyWrite(ret,addr);
       return ret;
     } catch (IOException ioe) {
       if (logger.level <= Logger.FINER) {

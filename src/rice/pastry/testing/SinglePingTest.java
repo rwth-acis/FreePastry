@@ -52,7 +52,7 @@ import java.lang.*;
  * 
  * A performance test suite for pastry.
  * 
- * @version $Id: SinglePingTest.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * 
  * @author Rongmei Zhang
  */

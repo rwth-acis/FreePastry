@@ -50,7 +50,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
  * at http://www.xmlpull.org.  Any of the provided parser implementations will work 
  * with this reader.
  *
- * @version $Id: XMLReader.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

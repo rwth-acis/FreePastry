@@ -51,7 +51,7 @@ import rice.pastry.socket.TransportLayerNodeHandle;
 /**
  * the node handle used with the direct network
  *
- * @version $Id: DirectNodeHandle.java 4632 2008-12-11 15:39:45Z jeffh $
+ * @version $Id$
  * @author Andrew Ladd
  * @author Rongmei Zhang/Y. Charlie Hu
  */

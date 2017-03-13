@@ -55,7 +55,7 @@ import rice.p2p.commonapi.*;
  * what happens when an object is inserted that already exists in
  * Past, etc.
  *
- * @version $Id: PastContent.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * @author Alan Mislove
  * @author Ansley Post
  * @author Peter Druschel

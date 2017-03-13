@@ -51,7 +51,7 @@ import java.util.*;
  * 
  * 
  * 
- * @version $Id: JoinRequest.java 4062 2007-12-26 12:35:03Z jeffh $
+ * @version $Id$
  * 
  * @author Jeff Hoye, Andrew Ladd
  */

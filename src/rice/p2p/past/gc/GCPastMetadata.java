@@ -47,7 +47,7 @@ import rice.p2p.past.*;
  * Class which is used as the metadata storage for the GC past implementation.
  * Basically wraps the long timestamp.
  *
- * @version $Id: GCPastMetadata.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * @author Peter Druschel 
  */
 public class GCPastMetadata implements Serializable, Comparable<GCPastMetadata> {

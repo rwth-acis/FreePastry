@@ -55,7 +55,7 @@ import java.util.*;
  * time.  Potentially this test should be run daily and the proximity recorded
  * over time to see if there was a drastic change based on algorithmic change.
  *
- * @version $Id: ClosestRegrTest.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author alan mislove
  */

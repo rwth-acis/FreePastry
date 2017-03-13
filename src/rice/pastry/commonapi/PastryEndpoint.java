@@ -61,7 +61,7 @@ import rice.pastry.standard.StandardAddress;
  * This class serves as gluecode, which allows applications written for the common
  * API to work with pastry.
  *
- * @version $Id: PastryEndpoint.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  * @author Peter Druschel

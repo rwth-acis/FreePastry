@@ -46,7 +46,7 @@ import java.io.*;
 /**
  * Broadcast message for a row from a routing table.
  * 
- * @version $Id: BroadcastRouteRow.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * 
  * @author Andrew Ladd
  */

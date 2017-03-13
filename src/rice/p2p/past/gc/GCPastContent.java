@@ -51,7 +51,7 @@ import rice.p2p.past.*;
  * version number, which to used to disambiguate multiple versions of
  * the same object.
  *
- * @version $Id: GCPastContent.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * @author Alan Mislove
  * @author Andreas Haeberlen
  */

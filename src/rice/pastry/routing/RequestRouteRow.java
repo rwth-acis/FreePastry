@@ -46,7 +46,7 @@ import java.util.*;
 /**
  * Request a row from the routing table from another node.
  * 
- * @version $Id: RequestRouteRow.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * 
  * @author Andrew Ladd
  */

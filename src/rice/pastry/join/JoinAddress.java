@@ -44,7 +44,7 @@ import java.io.*;
 /**
  * The address of the join receiver at a pastry node.
  * 
- * @version $Id: JoinAddress.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  * 
  * @author Andrew Ladd
  */

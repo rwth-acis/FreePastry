@@ -52,7 +52,7 @@ import rice.selector.TimerTask;
  * some number of children and controlling this is the way that bandwidth is controlled. If a stripe
  * is dropped then it searches for a new parent. 
  *
- * @version $Id: Stripe.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  * @author Ansley Post
  * @author Alan Mislove
  * @author Atul Singh

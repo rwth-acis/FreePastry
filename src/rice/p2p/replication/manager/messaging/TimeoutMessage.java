@@ -44,7 +44,7 @@ import rice.p2p.commonapi.*;
  *
  * This class represents a timeout for a client fetch call
  *
- * @version $Id: TimeoutMessage.java 3613 2007-02-15 14:45:14Z jstewart $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

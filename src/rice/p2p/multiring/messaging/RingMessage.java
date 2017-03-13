@@ -52,7 +52,7 @@ import rice.p2p.util.rawserialization.JavaSerializedMessage;
  *
  * This class the abstraction of a message used internally by the multiring hierarchy.
  *
- * @version $Id: RingMessage.java 4654 2009-01-08 16:33:07Z jeffh $
+ * @version $Id$
  *
  * @author Alan Mislove
  */

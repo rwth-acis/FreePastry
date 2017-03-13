@@ -46,7 +46,7 @@ import rice.p2p.scribe.rawserialization.*;
  *
  * This interface is exported by all instances of Scribe.  
  *
- * @version $Id: Scribe.java 3911 2007-10-18 03:15:55Z jeffh $
+ * @version $Id$
  * @author Alan Mislove
  */
 public interface Scribe extends RawScribe, JavaScribe {
