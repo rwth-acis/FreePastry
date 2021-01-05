@@ -107,7 +107,7 @@ public class XMLObjectInputStream extends ObjectInputStream {
    * The ReflectionFactory, which allows for prividged construction of
    * objects
    */
-  protected ReflectionFactory reflFactory = (ReflectionFactory) AccessController.doPrivileged(new sun.reflect.ReflectionFactory.GetReflectionFactoryAction());
+  protected ReflectionFactory reflFactory = AccessController.doPrivileged((PrivilegedAction<ReflectionFactory>)ReflectionFactory::getReflectionFactory);
 
   /**
    * The list of validation objects waiting for the entire object graph to be read in
