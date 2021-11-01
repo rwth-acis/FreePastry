@@ -3,7 +3,7 @@ This is a fork from the original open-source [FreePastry implementation](http://
 The most notable changes compared to the original are:
 - It is configured as an eclipse-project
 - Possesses a memory leak fix
-- Is compatible with Java 14
+- Is compatible with Java 17
 
 
 Build
